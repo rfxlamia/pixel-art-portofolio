@@ -1,0 +1,565 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Rafi "V" - AI Developer & Legal Tech Innovator | 8-Bit Portfolio</title>
+    <meta name="description" content="Rafi V (rfxlamia) - AI Developer & Legal Tech Innovator. Mahasiswa hukum dengan expertise AI ethical. 7+ klien aktif, 3 AI certifications, 8+ projects delivered.">
+    <meta name="keywords" content="AI Developer, Legal Tech, Artificial Intelligence, Python, Ethics, Indonesia">
+    <link rel="stylesheet" href="style.css">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Press+Start+2P&display=swap" rel="stylesheet">
+</head>
+<body>
+    <!-- Loading Screen -->
+    <div id="loading-screen" class="loading-screen">
+        <div class="loading-content">
+            <div class="pixel-mario"></div>
+            <div class="loading-text">LOADING WORLD...</div>
+            <div class="loading-bar">
+                <div class="loading-progress"></div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Game UI Header -->
+    <header class="game-header">
+        <div class="game-ui">
+            <div class="player-info">
+                <span class="player-name">RAFI "V"</span>
+                <div class="lives">
+                    <span class="life-icon">♥</span>
+                    <span class="life-icon">♥</span>
+                    <span class="life-icon">♥</span>
+                </div>
+            </div>
+            <div class="score">
+                <span class="score-label">SCORE</span>
+                <span class="score-value" id="score">0007500</span>
+            </div>
+            <div class="world-info">
+                <span class="world-label">WORLD</span>
+                <span class="world-value">1-1</span>
+            </div>
+            <div class="time">
+                <span class="time-label">TIME</span>
+                <span class="time-value" id="timer">999</span>
+            </div>
+        </div>
+    </header>
+
+    <!-- Navigation Menu -->
+    <nav class="game-nav" id="gameNav">
+        <div class="nav-container">
+            <button class="nav-btn active" data-world="home">🏠 HOME</button>
+            <button class="nav-btn" data-world="about">👤 ABOUT</button>
+            <button class="nav-btn" data-world="skills">⚡ SKILLS</button>
+            <button class="nav-btn" data-world="projects">🎮 PROJECTS</button>
+            <button class="nav-btn" data-world="contact">👹 BOSS</button>
+        </div>
+    </nav>
+
+    <!-- Main Game Area -->
+    <main class="game-world">
+        
+        <!-- HOME WORLD -->
+        <section id="home" class="world-section active">
+            <div class="world-background home-bg">
+            </div>
+            
+            <div class="hero-section">
+                <div class="character-sprite">
+                    <img src="https://i.imgur.com/H6so7ce.png" alt="Rafi Pixel Art" class="rafi-character">
+                    <div class="character-shadow"></div>
+                </div>
+                
+                <div class="hero-content">
+                    <div class="title-block">
+                        <h1 class="pixel-title">
+                            <span class="glitch-text">RAFI "V"</span>
+                        </h1>
+                        <h2 class="subtitle">AI DEVELOPER & LEGAL TECH INNOVATOR</h2>
+                        <div class="username">@rfxlamia</div>
+                    </div>
+                    
+                    <div class="stats-preview">
+                        <div class="stat-item">
+                            <span class="stat-number">7+</span>
+                            <span class="stat-label">ACTIVE CLIENTS</span>
+                        </div>
+                        <div class="stat-item">
+                            <span class="stat-number">3</span>
+                            <span class="stat-label">AI CERTIFICATIONS</span>
+                        </div>
+                        <div class="stat-item">
+                            <span class="stat-number">8+</span>
+                            <span class="stat-label">PROJECTS DELIVERED</span>
+                        </div>
+                    </div>
+
+                    <div class="unique-value">
+                        <div class="power-up-box">
+                            <span class="power-icon">⭐</span>
+                            <span class="power-text">RARE COMBINATION: LEGAL EXPERTISE + AI TECHNICAL SKILLS</span>
+                        </div>
+                    </div>
+                    
+                    <button class="start-btn" onclick="startGame()">
+                        <span class="btn-text">START ADVENTURE</span>
+                        <span class="btn-arrow">▶</span>
+                    </button>
+                </div>
+            </div>
+
+        </section>
+
+        <!-- ABOUT WORLD -->
+        <section id="about" class="world-section">
+            <div class="world-background about-bg">
+            </div>
+            
+            <div class="about-content">
+                <div class="section-header">
+                    <h2 class="section-title">PLAYER PROFILE</h2>
+                    <div class="level-indicator">WORLD 1-2</div>
+                </div>
+
+                <div class="character-info">
+                    <div class="character-card">
+                        <div class="character-avatar">
+                            <img src="https://i.imgur.com/4tDpwlY.png" alt="Rafi Profile" class="avatar-sprite">
+                            <div class="status-indicator online"></div>
+                        </div>
+                        
+                        <div class="character-details">
+                            <h3 class="character-name">RAFI "V" | RFXLAMIA</h3>
+                            <div class="character-class">AI DEVELOPER & LEGAL TECH INNOVATOR</div>
+                            
+                            <div class="character-background">
+                                <p class="bio-text">
+                                    Mahasiswa hukum dengan passion mendalam terhadap AI ethical. 
+                                    Kombinasi unik antara legal expertise dan AI technical skills 
+                                    yang memungkinkan penciptaan solusi teknologi yang tidak hanya 
+                                    inovatif tapi juga etis dan legally compliant.
+                                </p>
+                            </div>
+
+                            <div class="achievements">
+                                <h4 class="achievements-title">ACHIEVEMENTS UNLOCKED</h4>
+                                <div class="achievement-list">
+                                    <div class="achievement-item">
+                                        <span class="achievement-icon">🏆</span>
+                                        <span class="achievement-text">Google Gen AI Leader</span>
+                                    </div>
+                                    <div class="achievement-item">
+                                        <span class="achievement-icon">🎓</span>
+                                        <span class="achievement-text">Vanderbilt AI Agent Developer</span>
+                                    </div>
+                                    <div class="achievement-item">
+                                        <span class="achievement-icon">🛡️</span>
+                                        <span class="achievement-text">Stanford Trustworthy AI Developer</span>
+                                    </div>
+                                    <div class="achievement-item">
+                                        <span class="achievement-icon">⚖️</span>
+                                        <span class="achievement-text">Legal Tech Innovation Specialist</span>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- SKILLS WORLD -->
+        <section id="skills" class="world-section">
+            <div class="world-background skills-bg">
+            </div>
+            
+            <div class="skills-content">
+                <div class="section-header">
+                    <h2 class="section-title">CHARACTER STATS</h2>
+                    <div class="level-indicator">WORLD 1-3</div>
+                </div>
+
+                <div class="stats-container">
+                    <div class="stat-category">
+                        <h3 class="category-title">TECHNICAL ABILITIES</h3>
+                        <div class="skill-bars">
+                            <div class="skill-item">
+                                <div class="skill-header">
+                                    <span class="skill-name">PYTHON</span>
+                                    <span class="skill-level">INTERMEDIATE</span>
+                                </div>
+                                <div class="skill-bar">
+                                    <div class="skill-progress" data-skill="75"></div>
+                                </div>
+                            </div>
+                            
+                            <div class="skill-item">
+                                <div class="skill-header">
+                                    <span class="skill-name">AI ETHICS</span>
+                                    <span class="skill-level">EXPERT</span>
+                                </div>
+                                <div class="skill-bar">
+                                    <div class="skill-progress" data-skill="90"></div>
+                                </div>
+                            </div>
+                            
+                            <div class="skill-item">
+                                <div class="skill-header">
+                                    <span class="skill-name">LEGAL TECH INTEGRATION</span>
+                                    <span class="skill-level">ADVANCED</span>
+                                </div>
+                                <div class="skill-bar">
+                                    <div class="skill-progress" data-skill="85"></div>
+                                </div>
+                            </div>
+                            
+                            <div class="skill-item">
+                                <div class="skill-header">
+                                    <span class="skill-name">AI AGENT DEVELOPMENT</span>
+                                    <span class="skill-level">ADVANCED</span>
+                                </div>
+                                <div class="skill-bar">
+                                    <div class="skill-progress" data-skill="80"></div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="stat-category">
+                        <h3 class="category-title">SPECIAL CERTIFICATIONS</h3>
+                        <div class="certification-grid">
+                            <div class="cert-card" onclick="toggleCertificate('google')">
+                                <img src="https://i.imgur.com/ExJAm3b.png" alt="Google Certificate" class="cert-icon google">
+                                <h4 class="cert-name">GOOGLE GEN AI LEADER</h4>
+                                <div class="cert-status">CERTIFIED ✓</div>
+                                <div class="cert-dropdown" id="google-dropdown">
+                                    <img src="https://i.imgur.com/JNMHXcT.jpeg" alt="Google Certificate Full" class="cert-full-image">
+                                </div>
+                            </div>
+                            
+                            <div class="cert-card" onclick="toggleCertificate('vanderbilt')">
+                                <img src="https://i.imgur.com/tW1NgIV.png" alt="Vanderbilt Certificate" class="cert-icon vanderbilt">
+                                <h4 class="cert-name">VANDERBILT AI AGENT DEVELOPER</h4>
+                                <div class="cert-status">CERTIFIED ✓</div>
+                                <div class="cert-dropdown" id="vanderbilt-dropdown">
+                                    <img src="https://i.imgur.com/5Pxg2BG.jpeg" alt="Vanderbilt Certificate Full" class="cert-full-image">
+                                </div>
+                            </div>
+                            
+                            <div class="cert-card" onclick="toggleCertificate('stanford')">
+                                <img src="https://i.imgur.com/uEwqRX9.png" alt="Stanford Certificate" class="cert-icon stanford">
+                                <h4 class="cert-name">STANFORD TRUSTWORTHY AI</h4>
+                                <div class="cert-status">CERTIFIED ✓</div>
+                                <div class="cert-dropdown" id="stanford-dropdown">
+                                    <img src="https://i.imgur.com/qPUFbmG.jpeg" alt="Stanford Certificate Full" class="cert-full-image">
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="stat-category">
+                        <h3 class="category-title">POWER-UP ABILITIES</h3>
+                        <div class="power-ups">
+                            <div class="power-up">
+                                <span class="power-icon">🧠</span>
+                                <span class="power-name">AI ETHICAL THINKING</span>
+                            </div>
+                            <div class="power-up">
+                                <span class="power-icon">⚖️</span>
+                                <span class="power-name">LEGAL COMPLIANCE</span>
+                            </div>
+                            <div class="power-up">
+                                <span class="power-icon">🚀</span>
+                                <span class="power-name">RAPID PROTOTYPING</span>
+                            </div>
+                            <div class="power-up">
+                                <span class="power-icon">🛡️</span>
+                                <span class="power-name">TRUSTWORTHY AI</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- PROJECTS WORLD -->
+        <section id="projects" class="world-section">
+            <div class="world-background projects-bg">
+            </div>
+            
+            <div class="projects-content">
+                <div class="section-header">
+                    <h2 class="section-title">GAME LEVELS</h2>
+                    <div class="level-indicator">WORLD 1-4</div>
+                </div>
+
+                <div class="levels-grid">
+                    <!-- Level 1: Buddy Platform -->
+                    <div class="level-card completed">
+                        <div class="level-header">
+                            <div class="level-number">1</div>
+                            <div class="level-status">COMPLETED</div>
+                        </div>
+                        <div class="level-content">
+                            <h3 class="level-title">BUDDY PLATFORM</h3>
+                            <div class="level-subtitle">Mental Health Tech</div>
+                            <p class="level-description">
+                                Revolutionary mental health support platform dengan AI-powered 
+                                counseling assistance dan ethical privacy protection.
+                            </p>
+                            <div class="level-tags">
+                                <span class="tag">AI ETHICS</span>
+                                <span class="tag">MENTAL HEALTH</span>
+                                <span class="tag">PRIVACY</span>
+                            </div>
+                        </div>
+                        <div class="level-footer">
+                            <div class="completion-stars">⭐⭐⭐</div>
+                        </div>
+                    </div>
+
+                    <!-- Level 2: Business Automation Suite -->
+                    <div class="level-card active">
+                        <div class="level-header">
+                            <div class="level-number">2</div>
+                            <div class="level-status">LIVE</div>
+                        </div>
+                        <div class="level-content">
+                            <h3 class="level-title">BUSINESS AUTOMATION SUITE</h3>
+                            <div class="level-subtitle">4-in-1 Solution</div>
+                            <p class="level-description">
+                                Comprehensive business automation platform melayani 7+ klien aktif 
+                                dengan integrated workflow management dan AI optimization.
+                            </p>
+                            <div class="level-tags">
+                                <span class="tag">AUTOMATION</span>
+                                <span class="tag">BUSINESS</span>
+                                <span class="tag">AI OPTIMIZATION</span>
+                            </div>
+                        </div>
+                        <div class="level-footer">
+                            <div class="client-count">7+ ACTIVE CLIENTS</div>
+                        </div>
+                    </div>
+
+                    <!-- Level 3: Agent Vocana -->
+                    <div class="level-card active">
+                        <div class="level-header">
+                            <div class="level-number">3</div>
+                            <div class="level-status">IN USE</div>
+                        </div>
+                        <div class="level-content">
+                            <h3 class="level-title">AGENT VOCANA</h3>
+                            <div class="level-subtitle">Legal Tech Assistant</div>
+                            <p class="level-description">
+                                AI-powered legal assistant digunakan oleh HRD dan lawyers untuk 
+                                document analysis, legal compliance, dan case management.
+                            </p>
+                            <div class="level-tags">
+                                <span class="tag">LEGAL TECH</span>
+                                <span class="tag">AI ASSISTANT</span>
+                                <span class="tag">COMPLIANCE</span>
+                            </div>
+                        </div>
+                        <div class="level-footer">
+                            <div class="user-type">HRD & LAWYERS</div>
+                        </div>
+                    </div>
+
+                    <!-- Level 4: Agent Custos -->
+                    <div class="level-card ongoing">
+                        <div class="level-header">
+                            <div class="level-number">4</div>
+                            <div class="level-status">ONGOING</div>
+                        </div>
+                        <div class="level-content">
+                            <h3 class="level-title">AGENT CUSTOS</h3>
+                            <div class="level-subtitle">AI Supervisor System</div>
+                            <p class="level-description">
+                                Advanced AI supervisory system untuk quality control, 
+                                performance monitoring, dan automated decision making.
+                            </p>
+                            <div class="level-tags">
+                                <span class="tag">AI SUPERVISION</span>
+                                <span class="tag">QUALITY CONTROL</span>
+                                <span class="tag">AUTOMATION</span>
+                            </div>
+                        </div>
+                        <div class="level-footer">
+                            <div class="progress-bar">
+                                <div class="progress-fill" style="width: 75%;"></div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Level 5: Ms.Strom -->
+                    <div class="level-card special">
+                        <div class="level-header">
+                            <div class="level-number">5</div>
+                            <div class="level-status">SPECIAL</div>
+                        </div>
+                        <div class="level-content">
+                            <h3 class="level-title">MS.STROM</h3>
+                            <div class="level-subtitle">Project Void - Sarcastic AI</div>
+                            <p class="level-description">
+                                Experimental sarcastic AI dengan advanced personality modeling 
+                                dan emotional intelligence untuk entertainment purposes.
+                            </p>
+                            <div class="level-tags">
+                                <span class="tag">EXPERIMENTAL</span>
+                                <span class="tag">AI PERSONALITY</span>
+                                <span class="tag">SARCASM</span>
+                            </div>
+                        </div>
+                        <div class="level-footer">
+                            <div class="special-indicator">🎭 VOID PROJECT</div>
+                        </div>
+                    </div>
+
+                    <!-- Level 6: Content Tools -->
+                    <div class="level-card completed">
+                        <div class="level-header">
+                            <div class="level-number">6</div>
+                            <div class="level-status">TOOLKIT</div>
+                        </div>
+                        <div class="level-content">
+                            <h3 class="level-title">CONTENT TOOLKIT</h3>
+                            <div class="level-subtitle">Triple Tool Suite</div>
+                            <p class="level-description">
+                                Content Scraper, Script Foundry, dan Super Content Generator - 
+                                comprehensive content creation and management ecosystem.
+                            </p>
+                            <div class="level-tags">
+                                <span class="tag">CONTENT AI</span>
+                                <span class="tag">AUTOMATION</span>
+                                <span class="tag">PRODUCTIVITY</span>
+                            </div>
+                        </div>
+                        <div class="level-footer">
+                            <div class="tool-count">3 TOOLS</div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- CONTACT/BOSS WORLD -->
+        <section id="contact" class="world-section">
+            <div class="world-background boss-bg">
+            </div>
+            
+            <div class="boss-content">
+                <div class="section-header">
+                    <h2 class="section-title">BOSS BATTLE</h2>
+                    <div class="level-indicator">FINAL STAGE</div>
+                </div>
+
+                <div class="boss-battle">
+                    <div class="boss-character">
+                        <div class="boss-sprite"></div>
+                        <div class="boss-health">
+                            <div class="health-label">COLLABORATION BOSS</div>
+                            <div class="health-bar">
+                                <div class="health-fill" id="bossHealth"></div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="battle-form">
+                        <form id="contactForm" class="contact-form">
+                            <div class="form-header">
+                                <h3>DEFEAT THE BOSS WITH YOUR MESSAGE!</h3>
+                                <p>Send your collaboration proposal to deal damage!</p>
+                            </div>
+
+                            <div class="form-group">
+                                <label for="name" class="form-label">YOUR NAME</label>
+                                <input type="text" id="name" name="name" class="form-input" required>
+                                <div class="input-indicator"></div>
+                            </div>
+
+                            <div class="form-group">
+                                <label for="email" class="form-label">EMAIL ADDRESS</label>
+                                <input type="email" id="email" name="email" class="form-input" required>
+                                <div class="input-indicator"></div>
+                            </div>
+
+                            <div class="form-group">
+                                <label for="project" class="form-label">PROJECT TYPE</label>
+                                <select id="project" name="project" class="form-select" required>
+                                    <option value="">Select your quest...</option>
+                                    <option value="ai-development">AI Development</option>
+                                    <option value="legal-tech">Legal Tech Solution</option>
+                                    <option value="business-automation">Business Automation</option>
+                                    <option value="ai-ethics-consultation">AI Ethics Consultation</option>
+                                    <option value="custom-project">Custom Project</option>
+                                </select>
+                                <div class="input-indicator"></div>
+                            </div>
+
+                            <div class="form-group">
+                                <label for="message" class="form-label">BATTLE STRATEGY (MESSAGE)</label>
+                                <textarea id="message" name="message" class="form-textarea" rows="5" placeholder="Describe your project, requirements, and how we can collaborate..." required></textarea>
+                                <div class="input-indicator"></div>
+                            </div>
+
+                            <button type="submit" class="boss-attack-btn">
+                                <span class="attack-text">LAUNCH ATTACK!</span>
+                                <span class="attack-icon">⚔️</span>
+                            </button>
+                        </form>
+
+                        <div class="victory-message" id="victoryMessage">
+                            <div class="victory-content">
+                                <h3>BOSS DEFEATED! 🎉</h3>
+                                <p>Your message has been sent successfully!</p>
+                                <p>Rafi will respond to your collaboration proposal soon.</p>
+                                <div class="contact-links">
+                                    <a href="https://linktr.ee/rfxlamia" target="_blank" class="contact-link">
+                                        <span class="link-icon">🔗</span>
+                                        <span class="link-text">linktr.ee/rfxlamia</span>
+                                    </a>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+    </main>
+
+    <!-- Game Footer -->
+    <footer class="game-footer">
+        <div class="footer-content">
+            <div class="footer-info">
+                <div class="copyright">
+                    <span>© 2024 RAFI "V" | RFXLAMIA</span>
+                </div>
+                <div class="social-links">
+                    <a href="https://linktr.ee/rfxlamia" target="_blank" class="social-link">
+                        <span class="social-icon">🔗</span>
+                        <span class="social-text">LINKTR.EE/RFXLAMIA</span>
+                    </a>
+                </div>
+            </div>
+            <div class="footer-credits">
+                <span class="credits-text">POWERED BY MSSTROMLABS</span>
+            </div>
+        </div>
+    </footer>
+
+    <!-- Sound Toggle -->
+    <div class="sound-control">
+        <button id="soundToggle" class="sound-btn">
+            <span class="sound-icon">🔊</span>
+        </button>
+    </div>
+
+
+    <script src="script.js"></script>
+</body>
+</html>

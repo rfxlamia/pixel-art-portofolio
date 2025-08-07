@@ -1,0 +1,1554 @@
+/* 8-Bit Mario Bros Portfolio - CSS */
+/* Reset dan Base Styles */
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+:root {
+    /* Mario Bros Color Palette */
+    --mario-red: #ca080a;
+    --mario-blue: #0080FF;
+    --mario-yellow: #FFD700;
+    --mario-green: #00FF00;
+    --mario-orange: #FF8C00;
+    --mario-black: #000000;
+    --mario-white: #F2F0F0;
+    --mario-gray: #808080;
+    --mario-dark-blue: #000080;
+    --mario-pink: #FF69B4;
+    --mario-purple: #8000FF;
+    
+    /* Background Colors */
+    --sky-blue: #5C94FC;
+    --ground-brown: #D2691E;
+    --castle-gray: #696969;
+    --underground-black: #1a1a1a;
+    
+    /* Game UI Colors */
+    --ui-bg: #000000;
+    --ui-text: #FFFFFF;
+    --health-green: #00FF00;
+    --health-yellow: #FFFF00;
+    --health-red: #FF0000;
+    
+    /* Typography */
+    --pixel-font: 'Press Start 2P', cursive;
+    
+    /* Spacing */
+    --pixel-size: 2px;
+    --grid-unit: 16px;
+}
+
+body {
+    font-family: var(--pixel-font);
+    font-size: 8px;
+    line-height: 1.4;
+    background: var(--mario-black);
+    color: var(--mario-white);
+    overflow-x: hidden;
+    image-rendering: pixelated;
+    image-rendering: -moz-crisp-edges;
+    image-rendering: crisp-edges;
+}
+
+/* Loading Screen */
+.loading-screen {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: var(--mario-black);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    z-index: 10000;
+    transition: opacity 0.5s ease-out;
+}
+
+.loading-screen.hidden {
+    opacity: 0;
+    pointer-events: none;
+}
+
+.loading-content {
+    text-align: center;
+}
+
+.pixel-mario {
+    width: 120px;
+    height: 120px;
+    background: url('https://i.imgur.com/BQg1BIZ.png') center/cover;
+    margin: 0 auto 20px;
+    animation: mario-jump 1s infinite;
+    image-rendering: pixelated;
+}
+
+@keyframes mario-jump {
+    0%, 100% { transform: translateY(0px); }
+    50% { transform: translateY(-10px); }
+}
+
+.loading-text {
+    color: var(--mario-white);
+    font-size: 12px;
+    margin-bottom: 20px;
+    animation: blink 1s infinite;
+}
+
+.loading-bar {
+    width: 200px;
+    height: 8px;
+    background: var(--mario-gray);
+    border: 2px solid var(--mario-white);
+    margin: 0 auto;
+}
+
+.loading-progress {
+    height: 100%;
+    background: var(--mario-green);
+    width: 0%;
+    animation: loading-fill 3s ease-out forwards;
+}
+
+@keyframes loading-fill {
+    to { width: 100%; }
+}
+
+@keyframes blink {
+    0%, 50% { opacity: 1; }
+    51%, 100% { opacity: 0; }
+}
+
+/* Game Header */
+.game-header {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    background: var(--ui-bg);
+    border-bottom: 4px solid var(--mario-white);
+    z-index: 1000;
+    padding: 8px 0;
+}
+
+.game-ui {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 0 20px;
+    font-size: 10px;
+}
+
+.player-info {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+}
+
+.player-name {
+    color: var(--mario-yellow);
+    font-weight: bold;
+}
+
+.lives {
+    display: flex;
+    gap: 2px;
+}
+
+.life-icon {
+    color: var(--mario-red);
+    font-size: 12px;
+}
+
+.score, .world-info, .time {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.score-label, .world-label, .time-label {
+    color: var(--mario-white);
+    font-size: 8px;
+}
+
+.score-value, .world-value, .time-value {
+    color: var(--mario-yellow);
+    font-size: 12px;
+}
+
+/* Navigation */
+.game-nav {
+    position: fixed;
+    top: 56px;
+    left: 0;
+    width: 100%;
+    background: var(--mario-dark-blue);
+    border-bottom: 4px solid var(--mario-white);
+    border-top: none;
+    z-index: 999;
+    padding: 10px 0;
+}
+
+.nav-container {
+    display: flex;
+    justify-content: center;
+    gap: 20px;
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 0 20px;
+}
+
+.nav-btn {
+    background: var(--mario-gray);
+    border: 3px solid var(--mario-white);
+    color: var(--mario-white);
+    font-family: var(--pixel-font);
+    font-size: 8px;
+    padding: 8px 12px;
+    cursor: pointer;
+    transition: all 0.1s;
+    position: relative;
+    text-transform: uppercase;
+}
+
+.nav-btn:hover {
+    background: var(--mario-yellow);
+    color: var(--mario-black);
+    transform: translateY(-2px);
+}
+
+.nav-btn.active {
+    background: var(--mario-red);
+    color: var(--mario-white);
+}
+
+.nav-btn:active {
+    transform: translateY(1px);
+}
+
+/* Main Game World */
+.game-world {
+    margin-top: 112px;
+    margin-bottom: 120px;
+    position: relative;
+    min-height: calc(100vh - 232px);
+}
+
+.world-section {
+    display: none;
+    position: relative;
+    min-height: calc(100vh - 120px);
+    padding: 40px 20px;
+}
+
+/* Khusus untuk home section - sesuaikan dengan ukuran GIF */
+#home {
+    height: 340px;
+    padding: 0 !important;
+    margin: 0 !important;
+    overflow-y: auto;
+    overflow-x: hidden;
+    background: url('https://media0.giphy.com/media/v1.Y2lkPTc5MGI3NjExZXlqMWpmNzFtbzNlMG91dmVyOHk2eDg3eW1zNThzaHo1ZGUwZHpicSZlcD12MV9pbnRlcm5hbF9naWZfYnlfaWQmY3Q9Zw/69XX5Hz66wxCqeoMHu/giphy.gif') center/cover no-repeat;
+    background-size: 100% 100%;
+    position: relative;
+    z-index: 1;
+}
+
+/* Custom scrollbar untuk section home */
+#home::-webkit-scrollbar {
+    width: 8px;
+}
+
+#home::-webkit-scrollbar-track {
+    background: var(--mario-black);
+    border-radius: 4px;
+}
+
+#home::-webkit-scrollbar-thumb {
+    background: var(--mario-red);
+    border-radius: 4px;
+    border: 1px solid var(--mario-white);
+}
+
+#home::-webkit-scrollbar-thumb:hover {
+    background: var(--mario-yellow);
+}
+
+.world-section.active {
+    display: block;
+}
+
+.world-background {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    z-index: -1;
+}
+
+/* Home World Background - disable world-background container */
+#home .world-background {
+    display: none;
+}
+
+.home-bg {
+    background: none;
+}
+
+
+/* Hero Section */
+.hero-section {
+    max-width: 1200px;
+    margin: 0 auto;
+    display: flex;
+    align-items: center;
+    gap: 60px;
+    min-height: 70vh;
+    position: relative;
+    padding: 20px;
+}
+
+.character-sprite {
+    position: relative;
+    width: 200px;
+    height: 200px;
+    flex-shrink: 0;
+}
+
+.rafi-character {
+    width: 100%;
+    height: 100%;
+    object-fit: contain;
+    animation: character-idle 2s ease-in-out infinite;
+    image-rendering: pixelated;
+    position: relative;
+    filter: drop-shadow(2px 2px 0 rgba(0,0,0,0.3));
+}
+
+.character-shadow {
+    position: absolute;
+    bottom: -10px;
+    left: 50%;
+    transform: translateX(-50%);
+    width: 60px;
+    height: 20px;
+    background: rgba(0, 0, 0, 0.3);
+    border-radius: 50%;
+    animation: shadow-pulse 2s ease-in-out infinite;
+}
+
+@keyframes character-idle {
+    0%, 100% { transform: translateY(0px) scale(1); }
+    50% { transform: translateY(-5px) scale(1.02); }
+}
+
+@keyframes shadow-pulse {
+    0%, 100% { transform: translateX(-50%) scale(1); }
+    50% { transform: translateX(-50%) scale(1.1); }
+}
+
+.hero-content {
+    flex: 1;
+}
+
+.title-block {
+    margin-bottom: 30px;
+}
+
+.pixel-title {
+    font-size: 24px;
+    color: var(--mario-yellow);
+    margin-bottom: 10px;
+    text-shadow: 
+        2px 2px 0px var(--mario-black),
+        -2px -2px 0px var(--mario-black),
+        2px -2px 0px var(--mario-black),
+        -2px 2px 0px var(--mario-black);
+}
+
+.glitch-text {
+    animation: glitch 2s ease-in-out infinite;
+}
+
+@keyframes glitch {
+    0%, 100% { transform: translateX(0); }
+    20% { transform: translateX(-2px); }
+    40% { transform: translateX(2px); }
+    60% { transform: translateX(-1px); }
+    80% { transform: translateX(1px); }
+}
+
+.subtitle {
+    font-size: 12px;
+    color: #f8f8ff;
+    text-shadow: 1px 1px 0px var(--mario-black);
+    margin-bottom: 5px;
+}
+
+.username {
+    font-size: 12px;
+    color: var(--mario-yellow);
+    text-shadow: 2px 2px 0px var(--mario-black);
+    margin-bottom: 20px;
+}
+
+.stats-preview {
+    display: flex;
+    gap: 30px;
+    margin-bottom: 30px;
+}
+
+.stat-item {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.stat-number {
+    font-size: 16px;
+    color: var(--mario-yellow);
+    text-shadow: 1px 1px 0px var(--mario-black);
+}
+
+.stat-label {
+    font-size: 6px;
+    color: var(--mario-white);
+    text-align: center;
+    margin-top: 5px;
+}
+
+.unique-value {
+    margin-bottom: 30px;
+}
+
+.power-up-box {
+    background: var(--mario-red);
+    border: 3px solid var(--mario-white);
+    padding: 15px;
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    animation: power-glow 2s ease-in-out infinite;
+}
+
+@keyframes power-glow {
+    0%, 100% { box-shadow: 0 0 0 rgba(255, 215, 0, 0.5); }
+    50% { box-shadow: 0 0 20px rgba(255, 215, 0, 0.8); }
+}
+
+.power-icon {
+    font-size: 16px;
+    animation: star-rotate 3s linear infinite;
+}
+
+@keyframes star-rotate {
+    0% { transform: rotate(0deg); }
+    100% { transform: rotate(360deg); }
+}
+
+.power-text {
+    font-size: 8px;
+    color: var(--mario-white);
+}
+
+.start-btn {
+    background: #12820f;
+    border: 4px solid var(--mario-white);
+    color: var(--mario-white);
+    font-family: var(--pixel-font);
+    font-size: 12px;
+    padding: 15px 30px;
+    cursor: pointer;
+    position: relative;
+    transition: all 0.1s;
+    display: flex;
+    align-items: center;
+    gap: 10px;
+}
+
+.start-btn:hover {
+    background: var(--mario-yellow);
+    color: var(--mario-black);
+    transform: translateY(-2px);
+}
+
+.start-btn:active {
+    transform: translateY(2px);
+}
+
+.btn-arrow {
+    animation: arrow-bounce 1s ease-in-out infinite;
+}
+
+@keyframes arrow-bounce {
+    0%, 100% { transform: translateX(0px); }
+    50% { transform: translateX(3px); }
+}
+
+
+/* About World */
+.about-bg {
+    background: url('https://media0.giphy.com/media/v1.Y2lkPTc5MGI3NjExdDQ5NXJwZmc0cjJmcXRucHdydDVtcXZzbDVyYWo1aHV4Z2t3YnQ0aiZlcD12MV9pbnRlcm5hbF9naWZfYnlfaWQmY3Q9Zw/A5ffIYwJoEpVcMOYiO/giphy.gif') center/cover no-repeat;
+}
+
+
+.about-content {
+    max-width: 1000px;
+    margin: 0 auto;
+}
+
+.section-header {
+    text-align: center;
+    margin-bottom: 40px;
+}
+
+.section-title {
+    font-size: 18px;
+    color: var(--mario-yellow);
+    margin-bottom: 10px;
+    text-shadow: 2px 2px 0px var(--mario-black);
+}
+
+.level-indicator {
+    font-size: 10px;
+    color: var(--mario-white);
+    background: var(--mario-red);
+    border: 2px solid var(--mario-white);
+    padding: 5px 10px;
+    display: inline-block;
+}
+
+.character-card {
+    background: rgba(255, 255, 255, 0.1);
+    backdrop-filter: blur(10px);
+    -webkit-backdrop-filter: blur(10px);
+    border: 4px solid rgba(255, 255, 255, 0.3);
+    box-shadow: 0 8px 32px rgba(0, 0, 0, 0.3);
+    padding: 30px;
+    display: flex;
+    gap: 30px;
+    align-items: flex-start;
+}
+
+.character-avatar {
+    position: relative;
+    width: 100px;
+    height: 100px;
+    flex-shrink: 0;
+}
+
+.avatar-sprite {
+    width: 100%;
+    height: 100%;
+    border: 3px solid var(--mario-white);
+    image-rendering: pixelated;
+    object-fit: cover;
+    border-radius: 8px;
+}
+
+.status-indicator {
+    position: absolute;
+    top: -5px;
+    right: -5px;
+    width: 20px;
+    height: 20px;
+    border-radius: 50%;
+    border: 2px solid var(--mario-white);
+}
+
+.status-indicator.online {
+    background: var(--mario-green);
+    animation: online-pulse 2s ease-in-out infinite;
+}
+
+@keyframes online-pulse {
+    0%, 100% { transform: scale(1); }
+    50% { transform: scale(1.2); }
+}
+
+.character-details {
+    flex: 1;
+}
+
+.character-name {
+    font-size: 14px;
+    color: var(--mario-yellow);
+    margin-bottom: 5px;
+}
+
+.character-class {
+    font-size: 10px;
+    color: #F2F0F0;
+    margin-bottom: 20px;
+}
+
+.bio-text {
+    font-size: 8px;
+    line-height: 1.6;
+    color: #F2F0F0;
+    margin-bottom: 25px;
+}
+
+.achievements-title {
+    font-size: 10px;
+    color: var(--mario-yellow);
+    margin-bottom: 15px;
+}
+
+.achievement-list {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+    gap: 10px;
+}
+
+.achievement-item {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    background: rgba(0, 0, 0, 0.3);
+    border: 2px solid var(--mario-white);
+    padding: 8px;
+}
+
+.achievement-icon {
+    font-size: 12px;
+}
+
+.achievement-text {
+    font-size: 7px;
+    color: var(--mario-white);
+}
+
+/* Skills World */
+.skills-bg {
+    background: url('https://media0.giphy.com/media/v1.Y2lkPTc5MGI3NjExazR2M2c5MXE2d2tuNHE4enk0N3F5ZGx1bnl2OTA2b216Y29jeHJyZiZlcD12MV9pbnRlcm5hbF9naWZfYnlfaWQmY3Q9Zw/1yld7nW3oQ2IyRubUm/giphy.gif') center/cover no-repeat;
+}
+
+
+.skills-content {
+    max-width: 1200px;
+    margin: 0 auto;
+}
+
+.stats-container {
+    display: grid;
+    gap: 40px;
+}
+
+.stat-category {
+    background: transparent;
+    border: 4px solid var(--mario-white);
+    padding: 25px;
+    position: relative;
+    overflow: visible;
+}
+
+.category-title {
+    font-size: 12px;
+    color: var(--mario-yellow);
+    margin-bottom: 20px;
+    text-align: center;
+}
+
+.skill-bars {
+    display: grid;
+    gap: 20px;
+}
+
+.skill-item {
+    background: rgba(0, 0, 0, 0.3);
+    padding: 15px;
+    border: 2px solid var(--mario-white);
+}
+
+.skill-header {
+    display: flex;
+    justify-content: space-between;
+    margin-bottom: 10px;
+}
+
+.skill-name {
+    font-size: 8px;
+    color: var(--mario-white);
+}
+
+.skill-level {
+    font-size: 8px;
+    color: var(--mario-yellow);
+}
+
+.skill-bar {
+    width: 100%;
+    height: 12px;
+    background: var(--mario-gray);
+    border: 2px solid var(--mario-white);
+    position: relative;
+    overflow: hidden;
+}
+
+.skill-progress {
+    height: 100%;
+    background: linear-gradient(90deg, var(--mario-green), var(--mario-yellow), var(--mario-red));
+    width: 0%;
+    transition: width 2s ease-out;
+    position: relative;
+}
+
+.skill-progress::after {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background: linear-gradient(90deg, transparent, rgba(255,255,255,0.3), transparent);
+    animation: skill-shimmer 2s ease-in-out infinite;
+}
+
+@keyframes skill-shimmer {
+    0% { transform: translateX(-100%); }
+    100% { transform: translateX(100%); }
+}
+
+.certification-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+    gap: 20px;
+    position: relative;
+    overflow: visible;
+}
+
+.cert-card {
+    background: rgba(255, 255, 255, 0.1);
+    backdrop-filter: blur(10px);
+    -webkit-backdrop-filter: blur(10px);
+    color: var(--mario-white);
+    border: 3px solid rgba(255, 255, 255, 0.3);
+    box-shadow: 0 8px 32px rgba(0, 0, 0, 0.3);
+    padding: 20px;
+    text-align: center;
+    transition: all 0.3s ease;
+    cursor: pointer;
+    position: relative;
+    overflow: visible;
+}
+
+.cert-card:hover {
+    transform: translateY(-5px);
+    border-color: rgba(0, 255, 0, 0.6);
+    box-shadow: 0 12px 24px rgba(0, 0, 0, 0.4);
+}
+
+.cert-card.active {
+    border-color: rgba(202, 8, 10, 0.8);
+    background: rgba(202, 8, 10, 0.1);
+    z-index: 10000;
+}
+
+.cert-icon {
+    width: 40px;
+    height: 40px;
+    margin: 0 auto 10px;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    object-fit: cover;
+    border: 2px solid var(--mario-white);
+    image-rendering: pixelated;
+}
+
+.cert-name {
+    font-size: 7px;
+    margin-bottom: 10px;
+    line-height: 1.3;
+}
+
+.cert-status {
+    font-size: 8px;
+    color: var(--mario-green);
+}
+
+/* Dropdown Effect untuk Certificates */
+.cert-dropdown {
+    position: absolute;
+    top: 100%;
+    left: 50%;
+    transform: translateX(-50%);
+    width: 300px;
+    max-width: 80vw;
+    background: var(--mario-white);
+    border: 3px solid var(--mario-red);
+    border-radius: 8px;
+    padding: 15px;
+    box-shadow: 0 8px 24px rgba(0,0,0,0.4);
+    opacity: 0;
+    visibility: hidden;
+    transform: translateX(-50%) translateY(-20px);
+    transition: all 0.3s ease;
+    z-index: 9999;
+}
+
+.cert-dropdown.active {
+    opacity: 1;
+    visibility: visible;
+    transform: translateX(-50%) translateY(10px);
+}
+
+.cert-dropdown::before {
+    content: '';
+    position: absolute;
+    top: -12px;
+    left: 50%;
+    transform: translateX(-50%);
+    width: 0;
+    height: 0;
+    border-left: 12px solid transparent;
+    border-right: 12px solid transparent;
+    border-bottom: 12px solid var(--mario-red);
+}
+
+.cert-full-image {
+    width: 100%;
+    height: auto;
+    border-radius: 4px;
+    image-rendering: auto;
+    filter: drop-shadow(2px 2px 4px rgba(0,0,0,0.2));
+}
+
+.power-ups {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+    gap: 15px;
+}
+
+.power-up {
+    background: rgba(255, 255, 255, 0.1);
+    backdrop-filter: blur(10px);
+    -webkit-backdrop-filter: blur(10px);
+    border: 3px solid rgba(255, 255, 255, 0.3);
+    box-shadow: 0 8px 32px rgba(0, 0, 0, 0.3);
+    padding: 15px;
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    animation: power-up-glow 3s ease-in-out infinite;
+}
+
+@keyframes power-up-glow {
+    0%, 100% { box-shadow: 0 8px 32px rgba(0, 0, 0, 0.3); }
+    50% { box-shadow: 0 8px 32px rgba(0, 0, 0, 0.3), 0 0 15px rgba(255, 255, 255, 0.8); }
+}
+
+.power-icon {
+    font-size: 16px;
+}
+
+.power-name {
+    font-size: 7px;
+    color: var(--mario-white);
+}
+
+/* Projects World */
+.projects-bg {
+    background: url('https://media0.giphy.com/media/v1.Y2lkPTc5MGI3NjExNGY5ajI3b2xxdzEwaWdlZDlrc215a3Q1N3RoMGJ1ZndoZm5vY2VhdSZlcD12MV9pbnRlcm5hbF9naWZfYnlfaWQmY3Q9Zw/CjgNRG8CufDwA83jB6/giphy.gif') center/cover no-repeat;
+}
+
+
+.projects-content {
+    max-width: 1200px;
+    margin: 0 auto;
+}
+
+.levels-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
+    gap: 40px;
+    padding: 20px;
+}
+
+.level-card {
+    background: #5b8da0;
+    color: var(--mario-white);
+    border: 4px solid var(--mario-white);
+    box-shadow: 0 8px 32px rgba(0, 0, 0, 0.3);
+    position: relative;
+    overflow: visible;
+    transition: all 0.3s ease;
+    transform-origin: center center;
+}
+
+.level-card:hover {
+    transform: translateY(-5px) scale(1.1);
+}
+
+.level-card.completed {
+    border-color: var(--mario-white);
+}
+
+.level-card.completed .level-header {
+    background: #3a5f6b;
+}
+
+.level-card.active {
+    border-color: var(--mario-white);
+}
+
+.level-card.active .level-header {
+    background: #3a5f6b;
+}
+
+.level-card.ongoing {
+    border-color: var(--mario-white);
+}
+
+.level-card.ongoing .level-header {
+    background: #3a5f6b;
+}
+
+.level-card.special {
+    border-color: var(--mario-white);
+}
+
+.level-card.special .level-header {
+    background: #3a5f6b;
+}
+
+.level-header {
+    background: #3a5f6b;
+    color: var(--mario-white);
+    padding: 10px 15px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.level-number {
+    font-size: 16px;
+    width: 30px;
+    height: 30px;
+    background: var(--mario-white);
+    color: var(--mario-black);
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border: 2px solid var(--mario-black);
+}
+
+.level-status {
+    font-size: 8px;
+}
+
+.level-content {
+    padding: 20px;
+}
+
+.level-title {
+    font-size: 12px;
+    color: var(--mario-yellow);
+    text-shadow: 2px 2px 0px var(--mario-black);
+    margin-bottom: 5px;
+}
+
+.level-subtitle {
+    font-size: 8px;
+    color: var(--mario-yellow);
+    text-shadow: 1px 1px 0px var(--mario-black);
+    margin-bottom: 15px;
+}
+
+.level-description {
+    font-size: 8px;
+    line-height: 1.5;
+    margin-bottom: 15px;
+    color: var(--mario-black);
+}
+
+.level-tags {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 5px;
+    margin-bottom: 15px;
+}
+
+.tag {
+    background: var(--mario-blue);
+    color: var(--mario-white);
+    font-size: 6px;
+    padding: 3px 6px;
+    border: 1px solid var(--mario-white);
+}
+
+.level-footer {
+    padding: 10px 20px;
+    border-top: 2px solid #eee;
+    background: #5b8da0;
+}
+
+.completion-stars {
+    color: var(--mario-yellow);
+    font-size: 16px;
+}
+
+.client-count, .user-type, .tool-count, .special-indicator {
+    font-size: 8px;
+    color: #f8f8ff;
+    text-shadow: 1px 1px 0px var(--mario-black);
+    font-weight: bold;
+}
+
+.progress-bar {
+    width: 100%;
+    height: 8px;
+    background: var(--mario-gray);
+    border: 1px solid var(--mario-black);
+}
+
+.progress-fill {
+    height: 100%;
+    background: var(--mario-green);
+    transition: width 1s ease-out;
+}
+
+/* Boss Battle / Contact World */
+.boss-bg {
+    background: url('https://media3.giphy.com/media/v1.Y2lkPTc5MGI3NjExZmk0ejgweGt2enJ4bDdsaW40dzYyYWVjMTNlbjBsN3VycDQ3eTJpNSZlcD12MV9pbnRlcm5hbF9naWZfYnlfaWQmY3Q9Zw/mOnYWKGshkQGZreIe8/giphy.gif') center/cover no-repeat;
+}
+
+
+
+.boss-content {
+    max-width: 1200px;
+    margin: 0 auto;
+    position: relative;
+    z-index: 1;
+}
+
+.boss-battle {
+    display: grid;
+    grid-template-columns: 1fr 2fr;
+    gap: 40px;
+    align-items: flex-start;
+}
+
+.boss-character {
+    text-align: center;
+    position: sticky;
+    top: 20px;
+}
+
+.boss-sprite {
+    width: 150px;
+    height: 150px;
+    margin: 0 auto 20px;
+    background: url('https://i.imgur.com/450jgHa.png') center/cover;
+    border-radius: 50%;
+    animation: boss-breathe 2s ease-in-out infinite;
+    border: 4px solid var(--mario-white);
+    image-rendering: pixelated;
+}
+
+@keyframes boss-breathe {
+    0%, 100% { transform: scale(1); }
+    50% { transform: scale(1.05); }
+}
+
+.boss-health {
+    background: var(--mario-black);
+    border: 3px solid var(--mario-white);
+    padding: 10px;
+}
+
+.health-label {
+    font-size: 8px;
+    color: var(--mario-white);
+    text-align: center;
+    margin-bottom: 10px;
+}
+
+.health-bar {
+    width: 100%;
+    height: 15px;
+    background: var(--mario-gray);
+    border: 2px solid var(--mario-white);
+    position: relative;
+}
+
+.health-fill {
+    height: 100%;
+    background: linear-gradient(90deg, var(--mario-green), var(--mario-yellow), var(--mario-red));
+    width: 100%;
+    transition: width 0.5s ease-out;
+    animation: health-pulse 1s ease-in-out infinite;
+}
+
+@keyframes health-pulse {
+    0%, 100% { filter: brightness(1); }
+    50% { filter: brightness(1.2); }
+}
+
+.battle-form {
+    position: relative;
+}
+
+.contact-form {
+    background: rgba(0, 0, 0, 0.7);
+    border: 4px solid var(--mario-white);
+    padding: 30px;
+}
+
+.form-header {
+    text-align: center;
+    margin-bottom: 30px;
+}
+
+.form-header h3 {
+    font-size: 12px;
+    color: var(--mario-yellow);
+    margin-bottom: 10px;
+}
+
+.form-header p {
+    font-size: 8px;
+    color: var(--mario-white);
+}
+
+.form-group {
+    margin-bottom: 20px;
+    position: relative;
+}
+
+.form-label {
+    display: block;
+    font-size: 8px;
+    color: var(--mario-white);
+    margin-bottom: 8px;
+}
+
+.form-input, .form-select, .form-textarea {
+    width: 100%;
+    background: var(--mario-white);
+    border: 3px solid var(--mario-black);
+    color: var(--mario-black);
+    font-family: var(--pixel-font);
+    font-size: 8px;
+    padding: 8px;
+    transition: border-color 0.2s;
+}
+
+.form-input:focus, .form-select:focus, .form-textarea:focus {
+    outline: none;
+    border-color: var(--mario-yellow);
+}
+
+.form-textarea {
+    resize: vertical;
+    min-height: 80px;
+}
+
+.input-indicator {
+    position: absolute;
+    right: 10px;
+    top: 50%;
+    transform: translateY(-50%);
+    width: 10px;
+    height: 10px;
+    border-radius: 50%;
+    background: var(--mario-gray);
+    transition: background-color 0.2s;
+}
+
+.form-group.valid .input-indicator {
+    background: var(--mario-green);
+}
+
+.form-group.invalid .input-indicator {
+    background: var(--mario-red);
+}
+
+.boss-attack-btn {
+    width: 100%;
+    background: var(--mario-red);
+    border: 4px solid var(--mario-white);
+    color: var(--mario-white);
+    font-family: var(--pixel-font);
+    font-size: 12px;
+    padding: 15px;
+    cursor: pointer;
+    position: relative;
+    transition: all 0.1s;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 10px;
+}
+
+.boss-attack-btn:hover {
+    background: var(--mario-yellow);
+    color: var(--mario-black);
+    transform: translateY(-2px);
+}
+
+.boss-attack-btn:active {
+    transform: translateY(2px);
+}
+
+.attack-icon {
+    animation: attack-flash 1s ease-in-out infinite;
+}
+
+@keyframes attack-flash {
+    0%, 100% { opacity: 1; }
+    50% { opacity: 0.5; }
+}
+
+.victory-message {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: rgba(0, 0, 0, 0.9);
+    display: none;
+    align-items: center;
+    justify-content: center;
+    z-index: 10;
+}
+
+.victory-message.show {
+    display: flex;
+    animation: victory-appear 0.5s ease-out;
+}
+
+@keyframes victory-appear {
+    0% { opacity: 0; transform: scale(0.8); }
+    100% { opacity: 1; transform: scale(1); }
+}
+
+.victory-content {
+    background: var(--mario-yellow);
+    color: var(--mario-black);
+    border: 4px solid var(--mario-white);
+    padding: 30px;
+    text-align: center;
+    max-width: 400px;
+}
+
+.victory-content h3 {
+    font-size: 14px;
+    margin-bottom: 15px;
+    animation: victory-bounce 0.6s ease-out;
+}
+
+@keyframes victory-bounce {
+    0%, 20%, 40%, 60%, 80%, 100% { transform: translateY(0); }
+    10%, 30%, 50%, 70%, 90% { transform: translateY(-10px); }
+}
+
+.victory-content p {
+    font-size: 8px;
+    line-height: 1.5;
+    margin-bottom: 10px;
+}
+
+.contact-links {
+    margin-top: 20px;
+}
+
+.contact-link {
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    background: var(--mario-blue);
+    color: var(--mario-white);
+    text-decoration: none;
+    padding: 10px 15px;
+    border: 2px solid var(--mario-white);
+    transition: all 0.2s;
+}
+
+.contact-link:hover {
+    background: var(--mario-red);
+    transform: translateY(-2px);
+}
+
+/* Footer */
+.game-footer {
+    position: fixed;
+    bottom: 0;
+    left: 0;
+    width: 100%;
+    background: var(--mario-black);
+    border-top: 4px solid var(--mario-white);
+    padding: 15px 0;
+    z-index: 1000;
+}
+
+.footer-content {
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 0 20px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.copyright {
+    font-size: 8px;
+    color: var(--mario-white);
+}
+
+.social-links {
+    display: flex;
+    gap: 15px;
+}
+
+.social-link {
+    display: flex;
+    align-items: center;
+    gap: 5px;
+    color: var(--mario-yellow);
+    text-decoration: none;
+    font-size: 8px;
+    transition: color 0.2s;
+}
+
+.social-link:hover {
+    color: var(--mario-white);
+}
+
+.footer-credits {
+    font-size: 6px;
+    color: var(--mario-gray);
+    text-align: center;
+    margin-top: 10px;
+}
+
+/* Sound Control */
+.sound-control {
+    position: fixed;
+    top: 140px;
+    right: 20px;
+    z-index: 1000;
+}
+
+.sound-btn {
+    width: 40px;
+    height: 40px;
+    background: var(--mario-yellow);
+    border: 3px solid var(--mario-white);
+    border-radius: 50%;
+    color: var(--mario-black);
+    font-size: 16px;
+    cursor: pointer;
+    transition: all 0.2s;
+}
+
+.sound-btn:hover {
+    background: var(--mario-orange);
+    transform: scale(1.1);
+}
+
+.sound-btn.muted {
+    background: var(--mario-gray);
+    color: var(--mario-white);
+}
+
+
+/* Responsive Design */
+@media (max-width: 1024px) {
+    .hero-section {
+        flex-direction: column;
+        text-align: center;
+        gap: 30px;
+    }
+    
+    .character-sprite {
+        width: 150px;
+        height: 150px;
+    }
+    
+    .pixel-title {
+        font-size: 20px;
+    }
+    
+    .stats-preview {
+        justify-content: center;
+        gap: 20px;
+    }
+    
+    .boss-battle {
+        grid-template-columns: 1fr;
+        gap: 30px;
+    }
+    
+    .boss-character {
+        position: static;
+    }
+}
+
+@media (max-width: 768px) {
+    .game-ui {
+        flex-wrap: wrap;
+        gap: 10px;
+        justify-content: space-around;
+    }
+    
+    .nav-container {
+        flex-wrap: wrap;
+        gap: 10px;
+    }
+    
+    .nav-btn {
+        font-size: 7px;
+        padding: 6px 10px;
+    }
+    
+    .pixel-title {
+        font-size: 16px;
+    }
+    
+    .subtitle {
+        font-size: 10px;
+    }
+    
+    .stats-preview {
+        flex-direction: column;
+        gap: 15px;
+    }
+    
+    .character-card {
+        flex-direction: column;
+        text-align: center;
+        gap: 20px;
+    }
+    
+    .levels-grid {
+        grid-template-columns: 1fr;
+    }
+    
+    .achievement-list {
+        grid-template-columns: 1fr;
+    }
+    
+    .certification-grid {
+        grid-template-columns: 1fr;
+    }
+    
+    .power-ups {
+        grid-template-columns: 1fr;
+    }
+}
+
+@media (max-width: 480px) {
+    body {
+        font-size: 7px;
+    }
+    
+    .game-header {
+        padding: 5px 0;
+    }
+    
+    .game-nav {
+        top: 50px;
+        padding: 8px 0;
+    }
+    
+    .game-world {
+        margin-top: 100px;
+    }
+    
+    .world-section {
+        padding: 20px 15px;
+    }
+    
+    .pixel-title {
+        font-size: 14px;
+    }
+    
+    .section-title {
+        font-size: 14px;
+    }
+    
+    .character-sprite {
+        width: 120px;
+        height: 120px;
+    }
+    
+    .boss-sprite {
+        width: 120px;
+        height: 120px;
+    }
+    
+    .footer-content {
+        flex-direction: column;
+        gap: 10px;
+        text-align: center;
+    }
+    
+    .sound-control {
+        top: 110px;
+        right: 10px;
+    }
+    
+    .sound-btn {
+        width: 35px;
+        height: 35px;
+        font-size: 14px;
+    }
+}
+
+/* Animation Classes */
+.fade-in {
+    animation: fadeIn 0.5s ease-out;
+}
+
+@keyframes fadeIn {
+    0% { opacity: 0; transform: translateY(20px); }
+    100% { opacity: 1; transform: translateY(0); }
+}
+
+.slide-in-left {
+    animation: slideInLeft 0.5s ease-out;
+}
+
+@keyframes slideInLeft {
+    0% { opacity: 0; transform: translateX(-50px); }
+    100% { opacity: 1; transform: translateX(0); }
+}
+
+.slide-in-right {
+    animation: slideInRight 0.5s ease-out;
+}
+
+@keyframes slideInRight {
+    0% { opacity: 0; transform: translateX(50px); }
+    100% { opacity: 1; transform: translateX(0); }
+}
+
+/* Print Styles */
+@media print {
+    .loading-screen,
+    .game-header,
+    .game-nav,
+    .sound-control {
+        display: none !important;
+    }
+    
+    .world-section {
+        display: block !important;
+        page-break-after: always;
+    }
+    
+    body {
+        background: white !important;
+        color: black !important;
+    }
+}

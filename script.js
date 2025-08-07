@@ -1,0 +1,712 @@
+// 8-Bit Mario Bros Portfolio - JavaScript
+// Gaming Navigation, Sound Effects, dan Interactive Elements
+
+class PixelPortfolio {
+    constructor() {
+        this.currentWorld = 'home';
+        this.score = 7500;
+        this.timer = 999;
+        this.soundEnabled = true;
+        this.particles = [];
+        this.gameStarted = false;
+        
+        this.init();
+    }
+
+    init() {
+        this.setupEventListeners();
+        this.startLoadingSequence();
+        this.initializeBossHealth();
+        this.setupFormValidation();
+        this.startGameTimer();
+    }
+
+    // Loading Sequence
+    startLoadingSequence() {
+        const loadingScreen = document.getElementById('loading-screen');
+        const progressBar = document.querySelector('.loading-progress');
+        
+        // Simulate loading progress
+        let progress = 0;
+        const loadingInterval = setInterval(() => {
+            progress += Math.random() * 15;
+            if (progress >= 100) {
+                progress = 100;
+                clearInterval(loadingInterval);
+                
+                setTimeout(() => {
+                    loadingScreen.classList.add('hidden');
+                    this.gameStarted = true;
+                    this.playSound('gameStart');
+                    this.animateSkillBars();
+                }, 500);
+            }
+            progressBar.style.width = `${progress}%`;
+        }, 200);
+    }
+
+    // Event Listeners Setup
+    setupEventListeners() {
+        // Navigation buttons
+        const navButtons = document.querySelectorAll('.nav-btn');
+        navButtons.forEach(btn => {
+            btn.addEventListener('click', (e) => {
+                const world = e.target.getAttribute('data-world');
+                this.navigateToWorld(world);
+            });
+        });
+
+        // Start button
+        const startBtn = document.querySelector('.start-btn');
+        if (startBtn) {
+            startBtn.addEventListener('click', () => {
+                this.navigateToWorld('about');
+            });
+        }
+
+        // Sound toggle
+        const soundToggle = document.getElementById('soundToggle');
+        if (soundToggle) {
+            soundToggle.addEventListener('click', () => {
+                this.toggleSound();
+            });
+        }
+
+        // Contact form
+        const contactForm = document.getElementById('contactForm');
+        if (contactForm) {
+            contactForm.addEventListener('submit', (e) => {
+                this.handleFormSubmission(e);
+            });
+        }
+
+        // Form inputs for real-time validation
+        const formInputs = document.querySelectorAll('.form-input, .form-select, .form-textarea');
+        formInputs.forEach(input => {
+            input.addEventListener('input', (e) => {
+                this.validateInput(e.target);
+            });
+            input.addEventListener('blur', (e) => {
+                this.validateInput(e.target);
+            });
+        });
+
+        // Keyboard navigation
+        document.addEventListener('keydown', (e) => {
+            this.handleKeyboardNavigation(e);
+        });
+
+        // Resize handler
+        window.addEventListener('resize', () => {
+            this.handleResize();
+        });
+    }
+
+    // World Navigation
+    navigateToWorld(worldName) {
+        if (worldName === this.currentWorld) return;
+
+        this.playSound('worldTransition');
+        
+        // Update navigation
+        document.querySelectorAll('.nav-btn').forEach(btn => {
+            btn.classList.remove('active');
+        });
+        document.querySelector(`[data-world="${worldName}"]`).classList.add('active');
+
+        // Update world indicator
+        const worldIndicators = document.querySelectorAll('.world-value');
+        const worldMap = {
+            'home': '1-1',
+            'about': '1-2',
+            'skills': '1-3',
+            'projects': '1-4',
+            'contact': '1-5'
+        };
+        worldIndicators.forEach(indicator => {
+            indicator.textContent = worldMap[worldName] || '1-1';
+        });
+
+        // Hide current world
+        const currentSection = document.getElementById(this.currentWorld);
+        if (currentSection) {
+            currentSection.classList.remove('active');
+        }
+
+        // Show new world
+        setTimeout(() => {
+            const newSection = document.getElementById(worldName);
+            if (newSection) {
+                newSection.classList.add('active');
+                
+                // Trigger world-specific animations
+                this.triggerWorldAnimations(worldName);
+            }
+            this.currentWorld = worldName;
+            
+            // Update score based on world
+            this.updateScore(worldName);
+        }, 300);
+    }
+
+    // World-specific animations
+    triggerWorldAnimations(worldName) {
+        switch(worldName) {
+            case 'skills':
+                setTimeout(() => this.animateSkillBars(), 500);
+                break;
+            case 'projects':
+                setTimeout(() => this.animateProjectCards(), 500);
+                break;
+            case 'contact':
+                setTimeout(() => this.initializeBossHealth(), 500);
+                break;
+            case 'about':
+                setTimeout(() => this.animateAchievements(), 500);
+                break;
+        }
+    }
+
+    // Skill Bar Animations
+    animateSkillBars() {
+        const skillProgressBars = document.querySelectorAll('.skill-progress');
+        skillProgressBars.forEach((bar, index) => {
+            setTimeout(() => {
+                const skillLevel = bar.getAttribute('data-skill');
+                bar.style.width = `${skillLevel}%`;
+                this.playSound('skillUp');
+            }, index * 200);
+        });
+    }
+
+    // Project Cards Animation
+    animateProjectCards() {
+        const projectCards = document.querySelectorAll('.level-card');
+        projectCards.forEach((card, index) => {
+            card.style.opacity = '0';
+            card.style.transform = 'translateY(30px)';
+            
+            setTimeout(() => {
+                card.style.transition = 'all 0.5s ease-out';
+                card.style.opacity = '1';
+                card.style.transform = 'translateY(0px)';
+                this.playSound('levelAppear');
+                
+                // Remove inline styles after animation to allow CSS hover to work
+                setTimeout(() => {
+                    card.style.removeProperty('transform');
+                    card.style.removeProperty('transition');
+                }, 500);
+            }, index * 150);
+        });
+    }
+
+    // Achievement Animation
+    animateAchievements() {
+        const achievements = document.querySelectorAll('.achievement-item');
+        achievements.forEach((achievement, index) => {
+            achievement.style.opacity = '0';
+            achievement.style.transform = 'translateX(-30px)';
+            
+            setTimeout(() => {
+                achievement.style.transition = 'all 0.5s ease-out';
+                achievement.style.opacity = '1';
+                achievement.style.transform = 'translateX(0px)';
+                this.playSound('achievement');
+            }, index * 100);
+        });
+    }
+
+    // Boss Health Initialization
+    initializeBossHealth() {
+        const bossHealth = document.getElementById('bossHealth');
+        if (bossHealth) {
+            bossHealth.style.width = '100%';
+        }
+    }
+
+    // Form Validation
+    setupFormValidation() {
+        this.validationRules = {
+            name: {
+                required: true,
+                minLength: 2,
+                pattern: /^[a-zA-Z\s]+$/
+            },
+            email: {
+                required: true,
+                pattern: /^[^\s@]+@[^\s@]+\.[^\s@]+$/
+            },
+            project: {
+                required: true
+            },
+            message: {
+                required: true,
+                minLength: 10
+            }
+        };
+    }
+
+    validateInput(input) {
+        const fieldName = input.name;
+        const value = input.value.trim();
+        const rules = this.validationRules[fieldName];
+        const formGroup = input.closest('.form-group');
+        
+        let isValid = true;
+        let errorMessage = '';
+
+        if (rules) {
+            // Required validation
+            if (rules.required && !value) {
+                isValid = false;
+                errorMessage = 'Field ini wajib diisi!';
+            }
+
+            // Pattern validation
+            if (isValid && rules.pattern && value && !rules.pattern.test(value)) {
+                isValid = false;
+                if (fieldName === 'email') {
+                    errorMessage = 'Format email tidak valid!';
+                } else if (fieldName === 'name') {
+                    errorMessage = 'Nama hanya boleh mengandung huruf!';
+                }
+            }
+
+            // Min length validation
+            if (isValid && rules.minLength && value && value.length < rules.minLength) {
+                isValid = false;
+                errorMessage = `Minimal ${rules.minLength} karakter!`;
+            }
+        }
+
+        // Update UI
+        formGroup.classList.remove('valid', 'invalid');
+        if (value) {
+            formGroup.classList.add(isValid ? 'valid' : 'invalid');
+        }
+
+        // Remove existing error message
+        const existingError = formGroup.querySelector('.error-message');
+        if (existingError) {
+            existingError.remove();
+        }
+
+        // Add error message if invalid
+        if (!isValid && value) {
+            const errorElement = document.createElement('div');
+            errorElement.className = 'error-message';
+            errorElement.textContent = errorMessage;
+            errorElement.style.cssText = `
+                color: var(--mario-red);
+                font-size: 7px;
+                margin-top: 5px;
+                padding: 3px;
+                background: rgba(255, 0, 0, 0.1);
+                border: 1px solid var(--mario-red);
+            `;
+            formGroup.appendChild(errorElement);
+            this.playSound('error');
+        } else if (isValid && value) {
+            this.playSound('success');
+        }
+
+        return isValid;
+    }
+
+    // Form Submission
+    handleFormSubmission(e) {
+        e.preventDefault();
+        
+        const formData = new FormData(e.target);
+        const formValues = Object.fromEntries(formData.entries());
+        
+        // Validate all fields
+        let allValid = true;
+        Object.keys(this.validationRules).forEach(fieldName => {
+            const input = e.target.querySelector(`[name="${fieldName}"]`);
+            if (input && !this.validateInput(input)) {
+                allValid = false;
+            }
+        });
+
+        if (!allValid) {
+            this.playSound('error');
+            this.showMessage('Mohon perbaiki field yang tidak valid!', 'error');
+            return;
+        }
+
+        // Boss battle sequence
+        this.startBossBattle(formValues);
+    }
+
+    // Boss Battle Animation
+    startBossBattle(formData) {
+        const bossHealth = document.getElementById('bossHealth');
+        const attackBtn = document.querySelector('.boss-attack-btn');
+        const victoryMessage = document.getElementById('victoryMessage');
+        
+        // Disable form
+        attackBtn.disabled = true;
+        attackBtn.textContent = 'ATTACKING...';
+        
+        this.playSound('attack');
+        
+        // Damage animation
+        let damage = 0;
+        const attackInterval = setInterval(() => {
+            damage += Math.random() * 25;
+            if (damage >= 100) {
+                damage = 100;
+                clearInterval(attackInterval);
+                
+                // Boss defeated
+                bossHealth.style.width = '0%';
+                this.playSound('victory');
+                
+                setTimeout(() => {
+                    victoryMessage.classList.add('show');
+                    this.playSound('levelComplete');
+                    
+                    // Simulate form submission (in real app, send to server)
+                    this.submitFormData(formData);
+                }, 1000);
+            } else {
+                bossHealth.style.width = `${100 - damage}%`;
+            }
+        }, 300);
+    }
+
+    // Submit form data (placeholder for real implementation)
+    submitFormData(formData) {
+        // In a real application, you would send this data to a server
+        console.log('Form data submitted:', formData);
+        
+        // For demo purposes, just log the data
+        // In production, replace with actual API call:
+        /*
+        fetch('/api/contact', {
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/json',
+            },
+            body: JSON.stringify(formData)
+        })
+        .then(response => response.json())
+        .then(data => console.log('Success:', data))
+        .catch(error => console.error('Error:', error));
+        */
+    }
+
+    // Keyboard Navigation
+    handleKeyboardNavigation(e) {
+        const worldKeys = {
+            '1': 'home',
+            '2': 'about',
+            '3': 'skills',
+            '4': 'projects',
+            '5': 'contact'
+        };
+
+        if (worldKeys[e.key]) {
+            this.navigateToWorld(worldKeys[e.key]);
+        }
+
+        // Arrow key navigation
+        if (e.key === 'ArrowRight' || e.key === 'ArrowDown') {
+            this.navigateNext();
+        } else if (e.key === 'ArrowLeft' || e.key === 'ArrowUp') {
+            this.navigatePrevious();
+        }
+
+        // Sound toggle with 'M' key
+        if (e.key.toLowerCase() === 'm') {
+            this.toggleSound();
+        }
+    }
+
+    navigateNext() {
+        const worlds = ['home', 'about', 'skills', 'projects', 'contact'];
+        const currentIndex = worlds.indexOf(this.currentWorld);
+        const nextIndex = (currentIndex + 1) % worlds.length;
+        this.navigateToWorld(worlds[nextIndex]);
+    }
+
+    navigatePrevious() {
+        const worlds = ['home', 'about', 'skills', 'projects', 'contact'];
+        const currentIndex = worlds.indexOf(this.currentWorld);
+        const prevIndex = currentIndex === 0 ? worlds.length - 1 : currentIndex - 1;
+        this.navigateToWorld(worlds[prevIndex]);
+    }
+
+    // Score System
+    updateScore(worldName) {
+        const scoreMap = {
+            'home': 7500,
+            'about': 15000,
+            'skills': 22500,
+            'projects': 35000,
+            'contact': 50000
+        };
+        
+        const targetScore = scoreMap[worldName] || 7500;
+        const scoreElement = document.getElementById('score');
+        
+        this.animateScoreChange(this.score, targetScore, scoreElement);
+        this.score = targetScore;
+    }
+
+    animateScoreChange(from, to, element) {
+        const duration = 1000;
+        const startTime = Date.now();
+        
+        const animate = () => {
+            const elapsed = Date.now() - startTime;
+            const progress = Math.min(elapsed / duration, 1);
+            
+            const currentScore = Math.floor(from + (to - from) * progress);
+            element.textContent = currentScore.toString().padStart(7, '0');
+            
+            if (progress < 1) {
+                requestAnimationFrame(animate);
+            }
+        };
+        
+        animate();
+    }
+
+    // Timer System
+    startGameTimer() {
+        setInterval(() => {
+            if (this.gameStarted && this.timer > 0) {
+                this.timer--;
+                const timerElement = document.getElementById('timer');
+                if (timerElement) {
+                    timerElement.textContent = this.timer.toString();
+                    
+                    // Warning when time is low
+                    if (this.timer <= 100) {
+                        timerElement.style.color = 'var(--mario-red)';
+                        timerElement.style.animation = 'blink 0.5s infinite';
+                    }
+                }
+            }
+        }, 1000);
+    }
+
+
+    // Sound System
+    toggleSound() {
+        this.soundEnabled = !this.soundEnabled;
+        const soundBtn = document.getElementById('soundToggle');
+        const soundIcon = soundBtn.querySelector('.sound-icon');
+        
+        if (this.soundEnabled) {
+            soundIcon.textContent = '🔊';
+            soundBtn.classList.remove('muted');
+            this.playSound('soundOn');
+        } else {
+            soundIcon.textContent = '🔇';
+            soundBtn.classList.add('muted');
+        }
+    }
+
+    playSound(soundType) {
+        if (!this.soundEnabled) return;
+        
+        // Create Web Audio API context for 8-bit sounds
+        const audioContext = new (window.AudioContext || window.webkitAudioContext)();
+        
+        const soundMap = {
+            gameStart: { frequency: 523.25, duration: 0.5, type: 'square' },
+            worldTransition: { frequency: 659.25, duration: 0.3, type: 'sawtooth' },
+            skillUp: { frequency: 783.99, duration: 0.2, type: 'square' },
+            levelAppear: { frequency: 440, duration: 0.3, type: 'triangle' },
+            achievement: { frequency: 880, duration: 0.4, type: 'square' },
+            attack: { frequency: 220, duration: 0.6, type: 'sawtooth' },
+            victory: { frequency: 1046.50, duration: 1.0, type: 'square' },
+            levelComplete: { frequency: 523.25, duration: 0.8, type: 'triangle' },
+            error: { frequency: 146.83, duration: 0.5, type: 'sawtooth' },
+            success: { frequency: 698.46, duration: 0.3, type: 'sine' },
+            soundOn: { frequency: 880, duration: 0.2, type: 'square' },
+            menuSelect: { frequency: 587.33, duration: 0.2, type: 'square' },
+            menuBack: { frequency: 392.00, duration: 0.2, type: 'triangle' }
+        };
+        
+        const sound = soundMap[soundType];
+        if (!sound) return;
+        
+        try {
+            const oscillator = audioContext.createOscillator();
+            const gainNode = audioContext.createGain();
+            
+            oscillator.connect(gainNode);
+            gainNode.connect(audioContext.destination);
+            
+            oscillator.frequency.setValueAtTime(sound.frequency, audioContext.currentTime);
+            oscillator.type = sound.type;
+            
+            gainNode.gain.setValueAtTime(0.1, audioContext.currentTime);
+            gainNode.gain.exponentialRampToValueAtTime(0.001, audioContext.currentTime + sound.duration);
+            
+            oscillator.start(audioContext.currentTime);
+            oscillator.stop(audioContext.currentTime + sound.duration);
+        } catch (error) {
+            console.log('Audio not supported or error:', error);
+        }
+    }
+
+    // Utility Functions
+    showMessage(text, type = 'info') {
+        const messageDiv = document.createElement('div');
+        messageDiv.className = `game-message ${type}`;
+        messageDiv.textContent = text;
+        messageDiv.style.cssText = `
+            position: fixed;
+            top: 150px;
+            left: 50%;
+            transform: translateX(-50%);
+            background: ${type === 'error' ? 'var(--mario-red)' : 'var(--mario-green)'};
+            color: var(--mario-white);
+            padding: 10px 20px;
+            border: 3px solid var(--mario-white);
+            font-family: var(--pixel-font);
+            font-size: 8px;
+            z-index: 10000;
+            animation: message-appear 0.3s ease-out;
+        `;
+        
+        document.body.appendChild(messageDiv);
+        
+        setTimeout(() => {
+            messageDiv.remove();
+        }, 3000);
+    }
+
+    handleResize() {
+        // Handle window resize events
+        // Reserved for future responsive adjustments
+    }
+
+    // Certificate Dropdown Toggle
+    toggleCertificate(certType) {
+        const dropdown = document.getElementById(`${certType}-dropdown`);
+        const card = dropdown.closest('.cert-card');
+        
+        // Close all other dropdowns first
+        document.querySelectorAll('.cert-dropdown').forEach(dd => {
+            if (dd !== dropdown) {
+                dd.classList.remove('active');
+                dd.closest('.cert-card').classList.remove('active');
+            }
+        });
+        
+        // Toggle current dropdown
+        const isActive = dropdown.classList.contains('active');
+        
+        if (isActive) {
+            dropdown.classList.remove('active');
+            card.classList.remove('active');
+            this.playSound('menuBack');
+        } else {
+            dropdown.classList.add('active');
+            card.classList.add('active');
+            this.playSound('menuSelect');
+        }
+    }
+
+    // Public methods for external access
+    startGame() {
+        this.navigateToWorld('about');
+    }
+}
+
+// Initialize the portfolio when DOM is loaded
+document.addEventListener('DOMContentLoaded', () => {
+    window.pixelPortfolio = new PixelPortfolio();
+});
+
+// Global function for start button
+function startGame() {
+    if (window.pixelPortfolio) {
+        window.pixelPortfolio.startGame();
+    }
+}
+
+// Global function for certificate dropdown toggle
+function toggleCertificate(certType) {
+    if (window.pixelPortfolio) {
+        window.pixelPortfolio.toggleCertificate(certType);
+    }
+}
+
+// Add CSS animations via JavaScript for message
+const messageStyles = `
+@keyframes message-appear {
+    0% { opacity: 0; transform: translateX(-50%) translateY(-20px); }
+    100% { opacity: 1; transform: translateX(-50%) translateY(0px); }
+}
+`;
+
+const styleSheet = document.createElement('style');
+styleSheet.textContent = messageStyles;
+document.head.appendChild(styleSheet);
+
+// Service Worker Registration (optional, for offline functionality)
+if ('serviceWorker' in navigator && location.protocol !== 'file:') {
+    window.addEventListener('load', () => {
+        navigator.serviceWorker.register('/sw.js')
+            .then(registration => {
+                console.log('SW registered: ', registration);
+            })
+            .catch(registrationError => {
+                console.log('SW registration failed: ', registrationError);
+            });
+    });
+}
+
+// Performance monitoring
+const performanceObserver = new PerformanceObserver((list) => {
+    const entries = list.getEntries();
+    entries.forEach((entry) => {
+        if (entry.entryType === 'navigation') {
+            console.log('Page load time:', entry.loadEventEnd - entry.loadEventStart);
+        }
+    });
+});
+
+try {
+    performanceObserver.observe({ entryTypes: ['navigation'] });
+} catch (e) {
+    console.log('Performance Observer not supported');
+}
+
+// Accessibility enhancements
+document.addEventListener('keydown', (e) => {
+    // Skip to main content with Alt+S
+    if (e.altKey && e.key.toLowerCase() === 's') {
+        const mainContent = document.querySelector('.game-world');
+        if (mainContent) {
+            mainContent.focus();
+            mainContent.scrollIntoView();
+        }
+    }
+});
+
+// Add focus indicators for keyboard navigation
+document.addEventListener('focus', (e) => {
+    if (e.target.matches('.nav-btn, .start-btn, .boss-attack-btn, .contact-link')) {
+        e.target.style.outline = '3px solid var(--mario-yellow)';
+    }
+}, true);
+
+document.addEventListener('blur', (e) => {
+    if (e.target.matches('.nav-btn, .start-btn, .boss-attack-btn, .contact-link')) {
+        e.target.style.outline = 'none';
+    }
+}, true);
+
+// Export for module systems
+if (typeof module !== 'undefined' && module.exports) {
+    module.exports = PixelPortfolio;
+}
