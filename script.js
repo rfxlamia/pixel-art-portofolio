@@ -412,12 +412,15 @@ class PixelPortfolio {
             this.navigateToWorld(worldKeys[e.key]);
         }
 
-        // Arrow key navigation
-        if (e.key === 'ArrowRight' || e.key === 'ArrowDown') {
+        // Arrow key navigation (Left/Right only)
+        if (e.key === 'ArrowRight') {
             this.navigateNext();
-        } else if (e.key === 'ArrowLeft' || e.key === 'ArrowUp') {
+        } else if (e.key === 'ArrowLeft') {
             this.navigatePrevious();
         }
+        
+        // Up/Down arrows for content scrolling (let browser handle naturally)
+        // No preventDefault for Up/Down to allow normal scroll behavior
 
         // Sound toggle with 'M' key
         if (e.key.toLowerCase() === 'm') {
@@ -692,6 +695,29 @@ document.addEventListener('keydown', (e) => {
         }
     }
 });
+
+// Case Study Navigation Function
+function viewCaseStudy(projectId) {
+    // For now, show alert - will be replaced with actual case study website
+    const projectNames = {
+        'buddy': 'Buddy Platform',
+        'automation': 'Business Automation Suite', 
+        'vocana': 'Agent Vocana',
+        'custos': 'Agent Custos',
+        'msstrom': 'Ms.Strom (Project Void)',
+        'toolkit': 'Content Toolkit'
+    };
+    
+    const projectName = projectNames[projectId] || 'Project';
+    
+    // Show coming soon message with professional styling
+    const message = `📋 ${projectName} Case Study\n\n🚀 Detailed case study website in development!\n\nComing soon: Interactive case study with:\n• Technical deep-dive\n• Architecture diagrams  \n• Business impact metrics\n• Implementation insights\n\nStay tuned! ⭐`;
+    
+    alert(message);
+    
+    // TODO: Replace with actual navigation when case study website is ready
+    // window.open(`/case-study/${projectId}`, '_blank');
+}
 
 // Add focus indicators for keyboard navigation
 document.addEventListener('focus', (e) => {

@@ -49,19 +49,19 @@
         </div>
     </header>
 
-    <!-- Navigation Menu -->
-    <nav class="game-nav" id="gameNav">
-        <div class="nav-container">
-            <button class="nav-btn active" data-world="home">🏠 HOME</button>
-            <button class="nav-btn" data-world="about">👤 ABOUT</button>
-            <button class="nav-btn" data-world="skills">⚡ SKILLS</button>
-            <button class="nav-btn" data-world="projects">🎮 PROJECTS</button>
-            <button class="nav-btn" data-world="contact">👹 BOSS</button>
-        </div>
-    </nav>
-
     <!-- Main Game Area -->
     <main class="game-world">
+        
+        <!-- Navigation Menu -->
+        <nav class="game-nav" id="gameNav">
+            <div class="nav-container">
+                <button class="nav-btn active" data-world="home">🏠 HOME</button>
+                <button class="nav-btn" data-world="about">👤 ABOUT</button>
+                <button class="nav-btn" data-world="skills">⚡ SKILLS</button>
+                <button class="nav-btn" data-world="projects">🎮 PROJECTS</button>
+                <button class="nav-btn" data-world="contact">👹 BOSS</button>
+            </div>
+        </nav>
         
         <!-- HOME WORLD -->
         <section id="home" class="world-section active">
@@ -238,6 +238,7 @@
                                 <div class="cert-status">CERTIFIED ✓</div>
                                 <div class="cert-dropdown" id="google-dropdown">
                                     <img src="https://i.imgur.com/JNMHXcT.jpeg" alt="Google Certificate Full" class="cert-full-image">
+                                    <a href="https://is.gd/akEjQz" target="_blank" class="verify-link">🔗 Verify Certificate</a>
                                 </div>
                             </div>
                             
@@ -247,6 +248,7 @@
                                 <div class="cert-status">CERTIFIED ✓</div>
                                 <div class="cert-dropdown" id="vanderbilt-dropdown">
                                     <img src="https://i.imgur.com/5Pxg2BG.jpeg" alt="Vanderbilt Certificate Full" class="cert-full-image">
+                                    <a href="https://is.gd/bzk9FK" target="_blank" class="verify-link">🔗 Verify Certificate</a>
                                 </div>
                             </div>
                             
@@ -256,6 +258,7 @@
                                 <div class="cert-status">CERTIFIED ✓</div>
                                 <div class="cert-dropdown" id="stanford-dropdown">
                                     <img src="https://i.imgur.com/qPUFbmG.jpeg" alt="Stanford Certificate Full" class="cert-full-image">
+                                    <a href="https://is.gd/7Nsn5v" target="_blank" class="verify-link">🔗 Verify Certificate</a>
                                 </div>
                             </div>
                         </div>
@@ -308,8 +311,8 @@
                             <h3 class="level-title">BUDDY PLATFORM</h3>
                             <div class="level-subtitle">Mental Health Tech</div>
                             <p class="level-description">
-                                Revolutionary mental health support platform dengan AI-powered 
-                                counseling assistance dan ethical privacy protection.
+                                Evidence-based peer support platform dengan OARS+GROWCS methodology, 
+                                14-step gold standard training, dan strategic partnership development.
                             </p>
                             <div class="level-tags">
                                 <span class="tag">AI ETHICS</span>
@@ -319,6 +322,7 @@
                         </div>
                         <div class="level-footer">
                             <div class="completion-stars">⭐⭐⭐</div>
+                            <button class="case-study-btn" onclick="viewCaseStudy('buddy')">📋 View Case Study</button>
                         </div>
                     </div>
 
@@ -343,6 +347,7 @@
                         </div>
                         <div class="level-footer">
                             <div class="client-count">7+ ACTIVE CLIENTS</div>
+                            <button class="case-study-btn" onclick="viewCaseStudy('automation')">📋 View Case Study</button>
                         </div>
                     </div>
 
@@ -350,23 +355,24 @@
                     <div class="level-card active">
                         <div class="level-header">
                             <div class="level-number">3</div>
-                            <div class="level-status">IN USE</div>
+                            <div class="level-status">RESEARCH</div>
                         </div>
                         <div class="level-content">
                             <h3 class="level-title">AGENT VOCANA</h3>
-                            <div class="level-subtitle">Legal Tech Assistant</div>
+                            <div class="level-subtitle">Constitutional AI - Employment Law</div>
                             <p class="level-description">
-                                AI-powered legal assistant digunakan oleh HRD dan lawyers untuk 
-                                document analysis, legal compliance, dan case management.
+                                Project Aequitas flagship: Revolutionary Constitutional AI untuk Indonesian 
+                                employment law dengan 6-layer legal embedding dan anti-hallucination framework.
                             </p>
                             <div class="level-tags">
-                                <span class="tag">LEGAL TECH</span>
-                                <span class="tag">AI ASSISTANT</span>
-                                <span class="tag">COMPLIANCE</span>
+                                <span class="tag">CONSTITUTIONAL AI</span>
+                                <span class="tag">LEGAL REASONING</span>
+                                <span class="tag">ANTI-BIAS</span>
                             </div>
                         </div>
                         <div class="level-footer">
-                            <div class="user-type">HRD & LAWYERS</div>
+                            <div class="user-type">CONSTITUTIONAL AI RESEARCH</div>
+                            <button class="case-study-btn" onclick="viewCaseStudy('vocana')">📋 View Case Study</button>
                         </div>
                     </div>
 
@@ -374,25 +380,24 @@
                     <div class="level-card ongoing">
                         <div class="level-header">
                             <div class="level-number">4</div>
-                            <div class="level-status">ONGOING</div>
+                            <div class="level-status">FRAMEWORK</div>
                         </div>
                         <div class="level-content">
                             <h3 class="level-title">AGENT CUSTOS</h3>
-                            <div class="level-subtitle">AI Supervisor System</div>
+                            <div class="level-subtitle">Constitutional Guardian</div>
                             <p class="level-description">
-                                Advanced AI supervisory system untuk quality control, 
-                                performance monitoring, dan automated decision making.
+                                The "moral compass" of Project Aequitas: Constitutional AI framework untuk 
+                                bias detection, transparency auditing, dan Indonesian constitutional compliance.
                             </p>
                             <div class="level-tags">
-                                <span class="tag">AI SUPERVISION</span>
-                                <span class="tag">QUALITY CONTROL</span>
-                                <span class="tag">AUTOMATION</span>
+                                <span class="tag">CONSTITUTIONAL AI</span>
+                                <span class="tag">ETHICS</span>
+                                <span class="tag">BIAS DETECTION</span>
                             </div>
                         </div>
                         <div class="level-footer">
-                            <div class="progress-bar">
-                                <div class="progress-fill" style="width: 75%;"></div>
-                            </div>
+                            <div class="constitutional-indicator">🛡️ CONSTITUTIONAL AI</div>
+                            <button class="case-study-btn" onclick="viewCaseStudy('custos')">📋 View Case Study</button>
                         </div>
                     </div>
 
@@ -417,6 +422,7 @@
                         </div>
                         <div class="level-footer">
                             <div class="special-indicator">🎭 VOID PROJECT</div>
+                            <button class="case-study-btn" onclick="viewCaseStudy('msstrom')">📋 View Case Study</button>
                         </div>
                     </div>
 
@@ -441,6 +447,7 @@
                         </div>
                         <div class="level-footer">
                             <div class="tool-count">3 TOOLS</div>
+                            <button class="case-study-btn" onclick="viewCaseStudy('toolkit')">📋 View Case Study</button>
                         </div>
                     </div>
                 </div>
@@ -537,7 +544,7 @@
         <div class="footer-content">
             <div class="footer-info">
                 <div class="copyright">
-                    <span>© 2024 RAFI "V" | RFXLAMIA</span>
+                    <span>© 2025 RAFI "V" | RFXLAMIA</span>
                 </div>
                 <div class="social-links">
                     <a href="https://linktr.ee/rfxlamia" target="_blank" class="social-link">

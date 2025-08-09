@@ -183,14 +183,12 @@ body {
 
 /* Navigation */
 .game-nav {
-    position: fixed;
-    top: 56px;
-    left: 0;
+    position: relative;
     width: 100%;
     background: var(--mario-dark-blue);
     border-bottom: 4px solid var(--mario-white);
-    border-top: none;
-    z-index: 999;
+    border-top: 4px solid var(--mario-white);
+    z-index: 10;
     padding: 10px 0;
 }
 
@@ -209,7 +207,7 @@ body {
     color: var(--mario-white);
     font-family: var(--pixel-font);
     font-size: 8px;
-    padding: 8px 12px;
+    padding: 12px 16px;
     cursor: pointer;
     transition: all 0.1s;
     position: relative;
@@ -231,12 +229,21 @@ body {
     transform: translateY(1px);
 }
 
+.nav-btn:focus {
+    outline: none;
+    box-shadow: 
+        0 0 0 2px var(--mario-yellow),
+        0 0 0 4px rgba(255, 215, 0, 0.4),
+        0 0 12px rgba(255, 215, 0, 0.6);
+    border-color: var(--mario-yellow);
+}
+
 /* Main Game World */
 .game-world {
-    margin-top: 112px;
+    margin-top: 60px;
     margin-bottom: 120px;
     position: relative;
-    min-height: calc(100vh - 232px);
+    min-height: calc(100vh - 240px);
 }
 
 .world-section {
@@ -253,7 +260,7 @@ body {
     margin: 0 !important;
     overflow-y: auto;
     overflow-x: hidden;
-    background: url('https://media0.giphy.com/media/v1.Y2lkPTc5MGI3NjExZXlqMWpmNzFtbzNlMG91dmVyOHk2eDg3eW1zNThzaHo1ZGUwZHpicSZlcD12MV9pbnRlcm5hbF9naWZfYnlfaWQmY3Q9Zw/69XX5Hz66wxCqeoMHu/giphy.gif') center/cover no-repeat;
+    background: url('https://files.catbox.moe/v44o0r.webp') center/cover no-repeat;
     background-size: 100% 100%;
     position: relative;
     z-index: 1;
@@ -291,16 +298,6 @@ body {
     height: 100%;
     z-index: -1;
 }
-
-/* Home World Background - disable world-background container */
-#home .world-background {
-    display: none;
-}
-
-.home-bg {
-    background: none;
-}
-
 
 /* Hero Section */
 .hero-section {
@@ -421,6 +418,7 @@ body {
     color: var(--mario-white);
     text-align: center;
     margin-top: 5px;
+    text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.7);
 }
 
 .unique-value {
@@ -428,7 +426,7 @@ body {
 }
 
 .power-up-box {
-    background: var(--mario-red);
+    background: #dd5918;
     border: 3px solid var(--mario-white);
     padding: 15px;
     display: flex;
@@ -438,8 +436,8 @@ body {
 }
 
 @keyframes power-glow {
-    0%, 100% { box-shadow: 0 0 0 rgba(255, 215, 0, 0.5); }
-    50% { box-shadow: 0 0 20px rgba(255, 215, 0, 0.8); }
+    0%, 100% { box-shadow: 0 0 0 rgba(0, 0, 0, 0.5); }
+    50% { box-shadow: 0 0 20px rgba(0, 0, 0, 0.8); }
 }
 
 .power-icon {
@@ -482,6 +480,15 @@ body {
     transform: translateY(2px);
 }
 
+.start-btn:focus {
+    outline: none;
+    box-shadow: 
+        0 0 0 2px var(--mario-yellow),
+        0 0 0 4px rgba(255, 215, 0, 0.4),
+        0 0 15px rgba(255, 215, 0, 0.8);
+    border-color: var(--mario-yellow);
+}
+
 .btn-arrow {
     animation: arrow-bounce 1s ease-in-out infinite;
 }
@@ -494,7 +501,7 @@ body {
 
 /* About World */
 .about-bg {
-    background: url('https://media0.giphy.com/media/v1.Y2lkPTc5MGI3NjExdDQ5NXJwZmc0cjJmcXRucHdydDVtcXZzbDVyYWo1aHV4Z2t3YnQ0aiZlcD12MV9pbnRlcm5hbF9naWZfYnlfaWQmY3Q9Zw/A5ffIYwJoEpVcMOYiO/giphy.gif') center/cover no-repeat;
+    background: url('https://files.catbox.moe/i9yllq.webp') center/cover no-repeat;
 }
 
 
@@ -520,7 +527,7 @@ body {
     color: var(--mario-white);
     background: var(--mario-red);
     border: 2px solid var(--mario-white);
-    padding: 5px 10px;
+    padding: 12px 16px;
     display: inline-block;
 }
 
@@ -580,19 +587,22 @@ body {
     font-size: 14px;
     color: var(--mario-yellow);
     margin-bottom: 5px;
+    text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.7);
 }
 
 .character-class {
-    font-size: 10px;
+    font-size: 12px;
     color: #F2F0F0;
     margin-bottom: 20px;
+    text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.7);
 }
 
 .bio-text {
-    font-size: 8px;
+    font-size: 10px;
     line-height: 1.6;
     color: #F2F0F0;
     margin-bottom: 25px;
+    text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.7);
 }
 
 .achievements-title {
@@ -627,7 +637,7 @@ body {
 
 /* Skills World */
 .skills-bg {
-    background: url('https://media0.giphy.com/media/v1.Y2lkPTc5MGI3NjExazR2M2c5MXE2d2tuNHE4enk0N3F5ZGx1bnl2OTA2b216Y29jeHJyZiZlcD12MV9pbnRlcm5hbF9naWZfYnlfaWQmY3Q9Zw/1yld7nW3oQ2IyRubUm/giphy.gif') center/cover no-repeat;
+    background: url('https://files.catbox.moe/njjfkc.webp') center/cover no-repeat;
 }
 
 
@@ -745,6 +755,15 @@ body {
     box-shadow: 0 12px 24px rgba(0, 0, 0, 0.4);
 }
 
+.cert-card:focus {
+    outline: none;
+    border-color: var(--mario-yellow);
+    box-shadow: 
+        0 0 0 2px var(--mario-yellow),
+        0 0 0 4px rgba(255, 215, 0, 0.3),
+        0 8px 32px rgba(0, 0, 0, 0.3);
+}
+
 .cert-card.active {
     border-color: rgba(202, 8, 10, 0.8);
     background: rgba(202, 8, 10, 0.1);
@@ -820,6 +839,36 @@ body {
     border-radius: 4px;
     image-rendering: auto;
     filter: drop-shadow(2px 2px 4px rgba(0,0,0,0.2));
+    margin-bottom: 12px;
+}
+
+.verify-link {
+    display: inline-block;
+    background: #009338;
+    color: var(--mario-white);
+    text-decoration: none;
+    padding: 8px 12px;
+    border-radius: 4px;
+    font-size: 7px;
+    font-family: var(--pixel-font);
+    border: 2px solid var(--mario-white);
+    transition: all 0.2s ease;
+    margin-top: 8px;
+}
+
+.verify-link:hover {
+    background: var(--mario-yellow);
+    color: var(--mario-black);
+    transform: translateY(-2px);
+    box-shadow: 0 4px 8px rgba(0,0,0,0.3);
+}
+
+.verify-link:focus {
+    outline: none;
+    box-shadow: 
+        0 0 0 2px var(--mario-yellow),
+        0 0 0 4px rgba(255, 215, 0, 0.3),
+        0 0 12px rgba(255, 215, 0, 0.6);
 }
 
 .power-ups {
@@ -857,7 +906,7 @@ body {
 
 /* Projects World */
 .projects-bg {
-    background: url('https://media0.giphy.com/media/v1.Y2lkPTc5MGI3NjExNGY5ajI3b2xxdzEwaWdlZDlrc215a3Q1N3RoMGJ1ZndoZm5vY2VhdSZlcD12MV9pbnRlcm5hbF9naWZfYnlfaWQmY3Q9Zw/CjgNRG8CufDwA83jB6/giphy.gif') center/cover no-repeat;
+    background: url('https://files.catbox.moe/bxaw1s.webp') center/cover no-repeat;
 }
 
 
@@ -982,7 +1031,7 @@ body {
     background: var(--mario-blue);
     color: var(--mario-white);
     font-size: 6px;
-    padding: 3px 6px;
+    padding: 8px 12px;
     border: 1px solid var(--mario-white);
 }
 
@@ -990,6 +1039,11 @@ body {
     padding: 10px 20px;
     border-top: 2px solid #eee;
     background: #5b8da0;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    flex-wrap: wrap;
+    gap: 10px;
 }
 
 .completion-stars {
@@ -997,11 +1051,55 @@ body {
     font-size: 16px;
 }
 
-.client-count, .user-type, .tool-count, .special-indicator {
+.client-count, .user-type, .tool-count, .special-indicator, .constitutional-indicator {
     font-size: 8px;
     color: #f8f8ff;
     text-shadow: 1px 1px 0px var(--mario-black);
     font-weight: bold;
+}
+
+/* Constitutional AI Styling */
+.constitutional-indicator {
+    background: linear-gradient(135deg, #FFD700, #FFA500);
+    color: var(--mario-black);
+    padding: 4px 8px;
+    border-radius: 4px;
+    text-shadow: none;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
+    font-size: 7px;
+    letter-spacing: 0.5px;
+}
+
+/* Case Study Button Styles */
+.case-study-btn {
+    background: var(--mario-blue);
+    color: var(--mario-white);
+    border: 2px solid var(--mario-white);
+    padding: 6px 10px;
+    font-family: var(--pixel-font);
+    font-size: 7px;
+    cursor: pointer;
+    transition: all 0.2s ease;
+    border-radius: 4px;
+    text-shadow: 1px 1px 0px var(--mario-black);
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.3);
+    white-space: nowrap;
+}
+
+.case-study-btn:hover {
+    background: var(--mario-yellow);
+    color: var(--mario-black);
+    border-color: var(--mario-black);
+    text-shadow: none;
+    transform: translateY(-1px);
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.4);
+}
+
+.case-study-btn:focus {
+    outline: none;
+    box-shadow: 
+        0 0 0 2px var(--mario-yellow),
+        0 0 0 4px rgba(255, 215, 0, 0.4);
 }
 
 .progress-bar {
@@ -1019,7 +1117,7 @@ body {
 
 /* Boss Battle / Contact World */
 .boss-bg {
-    background: url('https://media3.giphy.com/media/v1.Y2lkPTc5MGI3NjExZmk0ejgweGt2enJ4bDdsaW40dzYyYWVjMTNlbjBsN3VycDQ3eTJpNSZlcD12MV9pbnRlcm5hbF9naWZfYnlfaWQmY3Q9Zw/mOnYWKGshkQGZreIe8/giphy.gif') center/cover no-repeat;
+    background: url('https://files.catbox.moe/tfafwh.webp') center/cover no-repeat;
 }
 
 
@@ -1146,6 +1244,10 @@ body {
 .form-input:focus, .form-select:focus, .form-textarea:focus {
     outline: none;
     border-color: var(--mario-yellow);
+    box-shadow: 
+        0 0 0 1px var(--mario-yellow),
+        0 0 0 3px rgba(255, 215, 0, 0.3),
+        0 0 8px rgba(255, 215, 0, 0.5);
 }
 
 .form-textarea {
@@ -1198,6 +1300,15 @@ body {
 
 .boss-attack-btn:active {
     transform: translateY(2px);
+}
+
+.boss-attack-btn:focus {
+    outline: none;
+    box-shadow: 
+        0 0 0 2px var(--mario-yellow),
+        0 0 0 4px rgba(255, 215, 0, 0.4),
+        0 0 15px rgba(255, 215, 0, 0.8);
+    border-color: var(--mario-yellow);
 }
 
 .attack-icon {
@@ -1277,6 +1388,15 @@ body {
 .contact-link:hover {
     background: var(--mario-red);
     transform: translateY(-2px);
+}
+
+.contact-link:focus {
+    outline: none;
+    box-shadow: 
+        0 0 0 2px var(--mario-yellow),
+        0 0 0 4px rgba(255, 215, 0, 0.3),
+        0 0 12px rgba(255, 215, 0, 0.6);
+    border-color: var(--mario-yellow);
 }
 
 /* Footer */
@@ -1408,7 +1528,7 @@ body {
     
     .nav-btn {
         font-size: 7px;
-        padding: 6px 10px;
+        padding: 12px 14px;
     }
     
     .pixel-title {
@@ -1457,12 +1577,7 @@ body {
     }
     
     .game-nav {
-        top: 50px;
         padding: 8px 0;
-    }
-    
-    .game-world {
-        margin-top: 100px;
     }
     
     .world-section {
