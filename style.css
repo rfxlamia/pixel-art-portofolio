@@ -660,8 +660,9 @@ body {
 
 .achievement-list {
     display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
-    gap: 10px;
+    grid-template-columns: repeat(auto-fit, minmax(min(250px, 100%), 1fr));
+    gap: clamp(10px, 2vw, 15px);
+    contain: layout;
 }
 
 .achievement-item {
@@ -775,10 +776,11 @@ body {
 
 .certification-grid {
     display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
-    gap: 20px;
+    grid-template-columns: repeat(auto-fit, minmax(min(200px, 100%), 1fr));
+    gap: clamp(15px, 3vw, 25px);
     position: relative;
     overflow: visible;
+    contain: layout;
 }
 
 .cert-card {
@@ -920,8 +922,9 @@ body {
 
 .power-ups {
     display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
-    gap: 15px;
+    grid-template-columns: repeat(auto-fit, minmax(min(200px, 100%), 1fr));
+    gap: clamp(15px, 3vw, 20px);
+    contain: layout;
 }
 
 .power-up {
@@ -964,9 +967,10 @@ body {
 
 .levels-grid {
     display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
-    gap: 40px;
-    padding: 20px;
+    grid-template-columns: repeat(auto-fill, minmax(min(350px, 100%), 1fr));
+    gap: clamp(20px, 4vw, 40px);
+    padding: clamp(15px, 3vw, 20px);
+    contain: layout;
 }
 
 .level-card {
@@ -1558,6 +1562,31 @@ body {
     
     .boss-character {
         position: static;
+    }
+}
+
+/* Intermediate breakpoint - Tablet Landscape */
+@media (min-width: 769px) and (max-width: 896px) {
+    .achievement-list {
+        grid-template-columns: repeat(2, 1fr);
+        gap: clamp(12px, 2.5vw, 18px);
+    }
+    
+    .certification-grid, .power-ups {
+        grid-template-columns: repeat(auto-fit, minmax(min(180px, 100%), 1fr));
+        gap: clamp(12px, 2.5vw, 20px);
+    }
+    
+    .levels-grid {
+        gap: clamp(25px, 3.5vw, 35px);
+    }
+    
+    .hero-section {
+        gap: 25px;
+    }
+    
+    .stats-preview {
+        gap: 18px;
     }
 }
 
