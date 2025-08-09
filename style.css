@@ -91,6 +91,12 @@ body {
     50% { transform: translateY(-10px); }
 }
 
+/* Gentle alternative for reduced motion */
+@keyframes mario-idle {
+    0%, 100% { transform: scale(1) translateY(0px); }
+    50% { transform: scale(1.02) translateY(-1px); }
+}
+
 .loading-text {
     color: var(--mario-white);
     font-size: 12px;
@@ -117,9 +123,20 @@ body {
     to { width: 100%; }
 }
 
+/* Gentle loading for reduced motion */
+@keyframes loading-fill-gentle {
+    to { width: 100%; }
+}
+
 @keyframes blink {
     0%, 50% { opacity: 1; }
     51%, 100% { opacity: 0; }
+}
+
+/* Gentle text fade for reduced motion */
+@keyframes text-fade {
+    0%, 80% { opacity: 1; }
+    90%, 100% { opacity: 0.7; }
 }
 
 /* Game Header */
@@ -345,9 +362,21 @@ body {
     50% { transform: translateY(-5px) scale(1.02); }
 }
 
+/* Gentle character breathing for reduced motion */
+@keyframes character-breathe {
+    0%, 100% { transform: scale(1); }
+    50% { transform: scale(1.01); }
+}
+
 @keyframes shadow-pulse {
     0%, 100% { transform: translateX(-50%) scale(1); }
     50% { transform: translateX(-50%) scale(1.1); }
+}
+
+/* Gentle shadow for reduced motion */
+@keyframes shadow-gentle {
+    0%, 100% { opacity: 0.3; }
+    50% { opacity: 0.4; }
 }
 
 .hero-content {
@@ -440,6 +469,12 @@ body {
     50% { box-shadow: 0 0 20px rgba(0, 0, 0, 0.8); }
 }
 
+/* Gentle glow for reduced motion */
+@keyframes power-gentle {
+    0%, 100% { filter: brightness(1); }
+    50% { filter: brightness(1.1); }
+}
+
 .power-icon {
     font-size: 16px;
     animation: star-rotate 3s linear infinite;
@@ -448,6 +483,12 @@ body {
 @keyframes star-rotate {
     0% { transform: rotate(0deg); }
     100% { transform: rotate(360deg); }
+}
+
+/* Star twinkle for reduced motion */
+@keyframes star-twinkle {
+    0%, 100% { opacity: 1; transform: scale(1); }
+    50% { opacity: 0.7; transform: scale(1.05); }
 }
 
 .power-text {
@@ -496,6 +537,12 @@ body {
 @keyframes arrow-bounce {
     0%, 100% { transform: translateX(0px); }
     50% { transform: translateX(3px); }
+}
+
+/* Gentle arrow pulse for reduced motion */
+@keyframes arrow-pulse {
+    0%, 100% { transform: scale(1); }
+    50% { transform: scale(1.05); }
 }
 
 
@@ -1628,6 +1675,280 @@ body {
 @keyframes fadeIn {
     0% { opacity: 0; transform: translateY(20px); }
     100% { opacity: 1; transform: translateY(0); }
+}
+
+/* Gentle fade for reduced motion */
+@keyframes fadeIn-gentle {
+    0% { opacity: 0; }
+    100% { opacity: 1; }
+}
+
+/* MOTION PREFERENCE CLASSES */
+/* Body classes for user-controlled motion preferences */
+
+/* Minimal Motion Mode - Focus Mode */
+body.motion-minimal * {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.1s !important;
+}
+
+body.motion-minimal .loading-progress,
+body.motion-minimal .skill-progress,
+body.motion-minimal .health-progress {
+    /* Keep functional animations */
+    animation-duration: 1s !important;
+    transition-duration: 0.3s !important;
+}
+
+/* Reduced Motion Mode - Gentle Mode */
+body.motion-reduced .pixel-mario {
+    animation: mario-idle 4s ease-in-out infinite !important;
+}
+
+body.motion-reduced .loading-text {
+    animation: text-fade 2s ease-in-out infinite !important;
+}
+
+body.motion-reduced .character-img {
+    animation: character-breathe 4s ease-in-out infinite !important;
+}
+
+body.motion-reduced .character-shadow {
+    animation: shadow-gentle 4s ease-in-out infinite !important;
+}
+
+body.motion-reduced .power-up-box {
+    animation: power-gentle 3s ease-in-out infinite !important;
+}
+
+body.motion-reduced .power-icon {
+    animation: star-twinkle 4s ease-in-out infinite !important;
+}
+
+body.motion-reduced .btn-arrow {
+    animation: arrow-pulse 2s ease-in-out infinite !important;
+}
+
+body.motion-reduced .fade-in {
+    animation: fadeIn-gentle 0.3s ease-out !important;
+}
+
+body.motion-reduced .glitch-text {
+    animation: none !important;
+}
+
+body.motion-reduced .boss-sprite {
+    animation: character-breathe 3s ease-in-out infinite !important;
+}
+
+body.motion-reduced .victory-star,
+body.motion-reduced .attack-effect {
+    animation: star-twinkle 2s ease-in-out infinite !important;
+}
+
+body.motion-reduced .status-online::after {
+    animation: shadow-gentle 2s ease-in-out infinite !important;
+}
+
+/* Full Motion Mode - Default gaming experience */
+body.motion-full {
+    /* All default animations active */
+}
+
+/* PREFERS-REDUCED-MOTION SUPPORT */
+/* System-level accessibility for users who haven't set preference */
+@media (prefers-reduced-motion: reduce) {
+    
+    /* Loading Screen - Gentler animations */
+    .pixel-mario {
+        animation: mario-idle 4s ease-in-out infinite;
+    }
+    
+    .loading-text {
+        animation: text-fade 2s ease-in-out infinite;
+    }
+    
+    .loading-progress {
+        animation: loading-fill-gentle 3s ease-out forwards;
+    }
+    
+    /* Character animations - Subtle breathing instead of jumping */
+    .character-img {
+        animation: character-breathe 4s ease-in-out infinite;
+    }
+    
+    .character-shadow {
+        animation: shadow-gentle 4s ease-in-out infinite;
+    }
+    
+    /* Power-ups and icons - Gentle effects */
+    .power-up-box {
+        animation: power-gentle 3s ease-in-out infinite;
+    }
+    
+    .power-icon {
+        animation: star-twinkle 4s ease-in-out infinite;
+    }
+    
+    /* Buttons - Scale instead of bounce */
+    .btn-arrow {
+        animation: arrow-pulse 2s ease-in-out infinite;
+    }
+    
+    /* Fade animations - Remove transform */
+    .fade-in {
+        animation: fadeIn-gentle 0.3s ease-out;
+    }
+    
+    /* Disable intense animations completely */
+    .glitch-text {
+        animation: none !important;
+    }
+    
+    /* Boss and battle elements - Gentle breathing */
+    .boss-sprite {
+        animation: character-breathe 3s ease-in-out infinite !important;
+    }
+    
+    /* Victory and attack effects - Minimal motion */
+    .victory-star,
+    .attack-effect {
+        animation: star-twinkle 2s ease-in-out infinite !important;
+    }
+    
+    /* Skill progress and health bars - Keep functional animations */
+    .skill-progress,
+    .health-progress,
+    .loading-progress {
+        /* Keep these - they're functional, not decorative */
+    }
+    
+    /* Online indicator - Gentle pulse */
+    .status-online::after {
+        animation: shadow-gentle 2s ease-in-out infinite !important;
+    }
+}
+
+/* Motion Control Panel - Gaming Style Accessibility Controls */
+.motion-control {
+    position: fixed;
+    top: 70px;
+    right: 20px;
+    z-index: 2000;
+}
+
+.motion-btn {
+    background: var(--mario-red);
+    border: 3px solid var(--mario-white);
+    width: 50px;
+    height: 50px;
+    border-radius: 0;
+    cursor: pointer;
+    font-family: var(--pixel-font);
+    color: var(--mario-white);
+    font-size: 16px;
+    transition: all 0.2s ease;
+    position: relative;
+    box-shadow: 0 4px 0 var(--mario-black);
+}
+
+.motion-btn:hover {
+    background: var(--mario-yellow);
+    color: var(--mario-black);
+    transform: translateY(1px);
+    box-shadow: 0 3px 0 var(--mario-black);
+}
+
+.motion-btn:active {
+    transform: translateY(4px);
+    box-shadow: none;
+}
+
+.motion-panel {
+    position: absolute;
+    top: 60px;
+    right: 0;
+    background: var(--mario-black);
+    border: 3px solid var(--mario-white);
+    padding: 15px;
+    min-width: 200px;
+    opacity: 0;
+    visibility: hidden;
+    transform: translateY(-10px);
+    transition: all 0.3s ease;
+}
+
+.motion-panel.show {
+    opacity: 1;
+    visibility: visible;
+    transform: translateY(0);
+}
+
+.motion-header {
+    font-family: var(--pixel-font);
+    font-size: 10px;
+    color: var(--mario-yellow);
+    text-align: center;
+    margin-bottom: 15px;
+    text-shadow: 1px 1px 0 var(--mario-black);
+}
+
+.motion-options {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+}
+
+.motion-option {
+    background: var(--mario-gray);
+    border: 2px solid var(--mario-white);
+    padding: 10px;
+    cursor: pointer;
+    font-family: var(--pixel-font);
+    font-size: 8px;
+    color: var(--mario-white);
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    transition: all 0.2s ease;
+}
+
+.motion-option:hover {
+    background: var(--mario-blue);
+    transform: translateY(-1px);
+}
+
+.motion-option.active {
+    background: var(--mario-green);
+    box-shadow: inset 0 0 5px rgba(0,0,0,0.5);
+}
+
+.option-icon {
+    font-size: 12px;
+}
+
+.option-text {
+    flex: 1;
+}
+
+/* Motion control responsive */
+@media (max-width: 768px) {
+    .motion-control {
+        top: 110px;
+        right: 10px;
+    }
+    
+    .motion-btn {
+        width: 40px;
+        height: 40px;
+        font-size: 14px;
+    }
+    
+    .motion-panel {
+        right: -20px;
+        min-width: 180px;
+    }
 }
 
 .slide-in-left {

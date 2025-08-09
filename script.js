@@ -9,12 +9,15 @@ class PixelPortfolio {
         this.soundEnabled = true;
         this.particles = [];
         this.gameStarted = false;
+        this.motionPreference = 'full'; // full, reduced, minimal
         
         this.init();
     }
 
     init() {
+        this.detectMotionPreference();
         this.setupEventListeners();
+        this.setupMotionControls();
         this.startLoadingSequence();
         this.initializeBossHealth();
         this.setupFormValidation();
@@ -440,6 +443,126 @@ class PixelPortfolio {
         const currentIndex = worlds.indexOf(this.currentWorld);
         const prevIndex = currentIndex === 0 ? worlds.length - 1 : currentIndex - 1;
         this.navigateToWorld(worlds[prevIndex]);
+    }
+
+    // Motion Preference Detection and Control
+    detectMotionPreference() {
+        // Check system preference first
+        if (window.matchMedia('(prefers-reduced-motion: reduce)').matches) {
+            this.motionPreference = 'reduced';
+        }
+        
+        // Check localStorage for user override
+        const savedPreference = localStorage.getItem('motionPreference');
+        if (savedPreference && ['full', 'reduced', 'minimal'].includes(savedPreference)) {
+            this.motionPreference = savedPreference;
+        }
+        
+        this.applyMotionPreference();
+    }
+    
+    setupMotionControls() {
+        const motionBtn = document.getElementById('motionBtn');
+        const motionPanel = document.getElementById('motionPanel');
+        const motionOptions = document.querySelectorAll('.motion-option');
+        
+        // Toggle motion panel
+        motionBtn.addEventListener('click', (e) => {
+            e.stopPropagation();
+            motionPanel.classList.toggle('show');
+            this.playSound('menuClick');
+        });
+        
+        // Close panel when clicking outside
+        document.addEventListener('click', (e) => {
+            if (!motionPanel.contains(e.target) && !motionBtn.contains(e.target)) {
+                motionPanel.classList.remove('show');
+            }
+        });
+        
+        // Motion option selection
+        motionOptions.forEach(option => {
+            option.addEventListener('click', (e) => {
+                const preference = option.dataset.motion;
+                this.setMotionPreference(preference);
+                
+                // Update active state
+                motionOptions.forEach(opt => opt.classList.remove('active'));
+                option.classList.add('active');
+                
+                motionPanel.classList.remove('show');
+                this.playSound('powerUp');
+            });
+        });
+        
+        // Set initial active state
+        const activeOption = document.querySelector(`[data-motion="${this.motionPreference}"]`);
+        if (activeOption) {
+            document.querySelectorAll('.motion-option').forEach(opt => opt.classList.remove('active'));
+            activeOption.classList.add('active');
+        }
+    }
+    
+    setMotionPreference(preference) {
+        this.motionPreference = preference;
+        localStorage.setItem('motionPreference', preference);
+        this.applyMotionPreference();
+        
+        // Show feedback
+        this.showMotionFeedback(preference);
+    }
+    
+    applyMotionPreference() {
+        const body = document.body;
+        
+        // Remove existing motion classes
+        body.classList.remove('motion-full', 'motion-reduced', 'motion-minimal');
+        
+        // Apply motion class
+        body.classList.add(`motion-${this.motionPreference}`);
+        
+        // Apply CSS custom property for JS-controlled animations
+        body.style.setProperty('--motion-preference', this.motionPreference);
+    }
+    
+    showMotionFeedback(preference) {
+        const feedbackTexts = {
+            'full': '⚡ FULL MOTION ACTIVATED!',
+            'reduced': '🌊 GENTLE MODE ACTIVATED!',
+            'minimal': '🔇 FOCUS MODE ACTIVATED!'
+        };
+        
+        // Create feedback element
+        const feedback = document.createElement('div');
+        feedback.className = 'motion-feedback';
+        feedback.textContent = feedbackTexts[preference];
+        feedback.style.cssText = `
+            position: fixed;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            background: var(--mario-black);
+            border: 3px solid var(--mario-yellow);
+            padding: 20px;
+            color: var(--mario-yellow);
+            font-family: var(--pixel-font);
+            font-size: 12px;
+            z-index: 9999;
+            text-align: center;
+            opacity: 0;
+            transition: opacity 0.3s ease;
+        `;
+        
+        document.body.appendChild(feedback);
+        
+        // Animate in
+        setTimeout(() => feedback.style.opacity = '1', 100);
+        
+        // Remove after delay
+        setTimeout(() => {
+            feedback.style.opacity = '0';
+            setTimeout(() => feedback.remove(), 300);
+        }, 2000);
     }
 
     // Score System
