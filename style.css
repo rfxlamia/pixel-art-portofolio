@@ -134,7 +134,7 @@ body {
 }
 
 .language-btn {
-    background: var(--mario-green);
+    background: #12820f;
     border: 3px solid var(--mario-white);
     padding: 20px;
     cursor: pointer;
@@ -921,6 +921,7 @@ body {
     position: relative;
     overflow: visible;
     contain: layout;
+    z-index: 1;
 }
 
 .cert-card {
@@ -1000,7 +1001,7 @@ body {
     visibility: hidden;
     transform: translateX(-50%) translateY(-20px);
     transition: all 0.3s ease;
-    z-index: 9999;
+    z-index: 10001;
 }
 
 .cert-dropdown.active {
@@ -1653,23 +1654,29 @@ body {
 .sound-btn {
     width: 40px;
     height: 40px;
-    background: var(--mario-yellow);
+    background: rgba(255, 255, 255, 0.1);
+    backdrop-filter: blur(10px);
+    -webkit-backdrop-filter: blur(10px);
     border: 3px solid var(--mario-white);
     border-radius: 50%;
-    color: var(--mario-black);
+    color: var(--mario-white);
     font-size: 16px;
     cursor: pointer;
     transition: all 0.2s;
 }
 
 .sound-btn:hover {
-    background: var(--mario-orange);
+    background: rgba(255, 255, 255, 0.2);
+    backdrop-filter: blur(15px);
+    border-color: var(--mario-yellow);
     transform: scale(1.1);
 }
 
 .sound-btn.muted {
-    background: var(--mario-gray);
-    color: var(--mario-white);
+    background: rgba(128, 128, 128, 0.2);
+    backdrop-filter: blur(10px);
+    border-color: var(--mario-gray);
+    color: var(--mario-gray);
 }
 
 
@@ -1826,7 +1833,7 @@ body {
     
     .sound-control {
         top: 110px;
-        right: 10px;
+        right: 70px;
     }
     
     .sound-btn {
