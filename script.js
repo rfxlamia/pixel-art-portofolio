@@ -10,15 +10,17 @@ class PixelPortfolio {
         this.particles = [];
         this.gameStarted = false;
         this.motionPreference = 'full'; // full, reduced, minimal
+        this.currentLanguage = 'id'; // default Indonesian
+        this.content = {}; // will hold loaded content
         
         this.init();
     }
 
     init() {
+        this.setupLanguageSelection();
         this.detectMotionPreference();
         this.setupEventListeners();
         this.setupMotionControls();
-        this.startLoadingSequence();
         this.initializeBossHealth();
         this.setupFormValidation();
         this.startGameTimer();
@@ -443,6 +445,195 @@ class PixelPortfolio {
         const currentIndex = worlds.indexOf(this.currentWorld);
         const prevIndex = currentIndex === 0 ? worlds.length - 1 : currentIndex - 1;
         this.navigateToWorld(worlds[prevIndex]);
+    }
+
+    // Language Selection and Content Loading System
+    setupLanguageSelection() {
+        const languageScreen = document.getElementById('language-screen');
+        const languageButtons = document.querySelectorAll('.language-btn');
+        
+        // Check for saved language preference
+        const savedLanguage = localStorage.getItem('selectedLanguage');
+        if (savedLanguage) {
+            this.currentLanguage = savedLanguage;
+            this.loadContent(savedLanguage);
+            return;
+        }
+        
+        // Setup language selection event listeners
+        languageButtons.forEach(btn => {
+            btn.addEventListener('click', (e) => {
+                const selectedLang = btn.dataset.lang;
+                this.selectLanguage(selectedLang);
+                this.playSound('menuClick');
+            });
+        });
+        
+        // Preload images during language selection
+        this.preloadImages();
+    }
+    
+    selectLanguage(language) {
+        this.currentLanguage = language;
+        localStorage.setItem('selectedLanguage', language);
+        
+        // Hide language screen, show loading screen
+        const languageScreen = document.getElementById('language-screen');
+        const loadingScreen = document.getElementById('loading-screen');
+        
+        languageScreen.classList.add('hidden');
+        loadingScreen.classList.remove('hidden');
+        
+        // Load content and start sequence
+        this.loadContent(language);
+    }
+    
+    async loadContent(language) {
+        try {
+            // Construct content URLs - you'll need to serve these files
+            const contentUrl = `./content/portfolio-content-${language}.json`;
+            
+            // For now, we'll use embedded content objects
+            await this.loadContentFromFiles(language);
+            
+            // Apply content to page
+            this.applyContent();
+            
+            // Start loading sequence
+            this.startLoadingSequence();
+            
+        } catch (error) {
+            console.error('Failed to load content:', error);
+            // Fallback to embedded content
+            this.loadEmbeddedContent(language);
+            this.applyContent();
+            this.startLoadingSequence();
+        }
+    }
+    
+    async loadContentFromFiles(language) {
+        // For production, you'd fetch from markdown files
+        // For now, we'll create embedded content objects based on the markdown structure
+        this.content = this.getEmbeddedContent(language);
+    }
+    
+    getEmbeddedContent(language) {
+        if (language === 'id') {
+            return {
+                loading_text: "MEMULAI PETUALANGAN...",
+                score_label: "SKOR",
+                world_label: "DUNIA", 
+                time_label: "WAKTU",
+                motion_header: "PENGATURAN PERMAINAN",
+                motion_full: "GERAK PENUH",
+                motion_reduced: "MODE HALUS",
+                motion_minimal: "MODE FOKUS",
+                nav_home: "🏠 BERANDA",
+                nav_about: "👤 TENTANG", 
+                nav_skills: "⚡ KEAHLIAN",
+                nav_projects: "🎮 PROYEK",
+                nav_contact: "📞 KONTAK",
+                title_main: "RAFI \"V\"",
+                subtitle: "PENGEMBANG AI & INOVATOR LEGAL TECH",
+                start_button: "MULAI PETUALANGAN",
+                unique_value_text: "KOMBINASI LANGKA: PEMAHAMAN HUKUM + KETERAMPILAN TEKNIS AI",
+                stats: [
+                    { number: "7+", label: "KLIEN AKTIF" },
+                    { number: "3", label: "SERTIFIKASI AI" },
+                    { number: "8+", label: "PROYEK SELESAI" }
+                ]
+                // ... akan continue dengan content lainnya
+            };
+        } else {
+            return {
+                loading_text: "LOADING WORLD...",
+                score_label: "SCORE",
+                world_label: "WORLD",
+                time_label: "TIME", 
+                motion_header: "GAME SETTINGS",
+                motion_full: "FULL MOTION",
+                motion_reduced: "GENTLE MODE",
+                motion_minimal: "FOCUS MODE",
+                nav_home: "🏠 HOME",
+                nav_about: "👤 ABOUT",
+                nav_skills: "⚡ SKILLS", 
+                nav_projects: "🎮 PROJECTS",
+                nav_contact: "📞 CONTACT",
+                title_main: "RAFI \"V\"",
+                subtitle: "AI DEVELOPER & LEGAL TECH INNOVATOR", 
+                start_button: "START ADVENTURE",
+                unique_value_text: "RARE COMBINATION: LEGAL EXPERTISE + AI TECHNICAL SKILLS",
+                stats: [
+                    { number: "7+", label: "ACTIVE CLIENTS" },
+                    { number: "3", label: "AI CERTIFICATIONS" },
+                    { number: "8+", label: "PROJECTS DELIVERED" }
+                ]
+                // ... akan continue dengan content lainnya
+            };
+        }
+    }
+    
+    applyContent() {
+        // Apply content to elements with data-text attributes
+        document.querySelectorAll('[data-text]').forEach(element => {
+            const key = element.getAttribute('data-text');
+            if (this.content[key]) {
+                element.textContent = this.content[key];
+            }
+        });
+        
+        // Apply content to specific elements
+        this.updateGameHeader();
+        this.updateNavigation(); 
+        this.updateStats();
+        // ... akan continue dengan sections lainnya
+    }
+    
+    updateGameHeader() {
+        const scoreLabel = document.querySelector('.score-label');
+        const worldLabel = document.querySelector('.world-label');
+        const timeLabel = document.querySelector('.time-label');
+        
+        if (scoreLabel) scoreLabel.textContent = this.content.score_label;
+        if (worldLabel) worldLabel.textContent = this.content.world_label;
+        if (timeLabel) timeLabel.textContent = this.content.time_label;
+    }
+    
+    updateNavigation() {
+        const navButtons = document.querySelectorAll('.nav-btn');
+        const navKeys = ['nav_home', 'nav_about', 'nav_skills', 'nav_projects', 'nav_contact'];
+        
+        navButtons.forEach((btn, index) => {
+            if (this.content[navKeys[index]]) {
+                btn.innerHTML = this.content[navKeys[index]];
+            }
+        });
+    }
+    
+    updateStats() {
+        const statItems = document.querySelectorAll('.stat-item');
+        statItems.forEach((item, index) => {
+            if (this.content.stats && this.content.stats[index]) {
+                const numberEl = item.querySelector('.stat-number');
+                const labelEl = item.querySelector('.stat-label');
+                
+                if (numberEl) numberEl.textContent = this.content.stats[index].number;
+                if (labelEl) labelEl.textContent = this.content.stats[index].label;
+            }
+        });
+    }
+    
+    preloadImages() {
+        const images = [
+            'https://i.imgur.com/BQg1BIZ.png', // Mario sprite
+            'https://i.imgur.com/H6so7ce.png', // Character sprite
+            'https://i.imgur.com/4tDpwlY.png'  // Profile avatar
+        ];
+        
+        images.forEach(src => {
+            const img = new Image();
+            img.src = src;
+        });
     }
 
     // Motion Preference Detection and Control

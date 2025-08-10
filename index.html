@@ -12,11 +12,36 @@
     <link href="https://fonts.googleapis.com/css2?family=Press+Start+2P&display=swap" rel="stylesheet">
 </head>
 <body>
+    <!-- Language Selection Screen -->
+    <div id="language-screen" class="language-screen">
+        <div class="language-content">
+            <div class="language-header">
+                <div class="game-logo">RAFI "V"</div>
+                <div class="game-subtitle">AI DEVELOPER & LEGAL TECH INNOVATOR</div>
+            </div>
+            <div class="language-selection">
+                <h2 class="select-title">SELECT LANGUAGE / PILIH BAHASA</h2>
+                <div class="language-options">
+                    <button class="language-btn" data-lang="en" id="lang-en">
+                        <span class="flag-icon">🇺🇸</span>
+                        <span class="lang-text">ENGLISH</span>
+                        <span class="lang-desc">International</span>
+                    </button>
+                    <button class="language-btn" data-lang="id" id="lang-id">
+                        <span class="flag-icon">🇮🇩</span>
+                        <span class="lang-text">BAHASA INDONESIA</span>
+                        <span class="lang-desc">Lokal</span>
+                    </button>
+                </div>
+            </div>
+        </div>
+    </div>
+
     <!-- Loading Screen -->
-    <div id="loading-screen" class="loading-screen">
+    <div id="loading-screen" class="loading-screen hidden">
         <div class="loading-content">
             <div class="pixel-mario"></div>
-            <div class="loading-text">LOADING WORLD...</div>
+            <div class="loading-text" data-text="loading_text">LOADING WORLD...</div>
             <div class="loading-bar">
                 <div class="loading-progress"></div>
             </div>
@@ -35,15 +60,15 @@
                 </div>
             </div>
             <div class="score">
-                <span class="score-label">SCORE</span>
+                <span class="score-label" data-text="score_label">SCORE</span>
                 <span class="score-value" id="score">0007500</span>
             </div>
             <div class="world-info">
-                <span class="world-label">WORLD</span>
+                <span class="world-label" data-text="world_label">WORLD</span>
                 <span class="world-value">1-1</span>
             </div>
             <div class="time">
-                <span class="time-label">TIME</span>
+                <span class="time-label" data-text="time_label">TIME</span>
                 <span class="time-value" id="timer">999</span>
             </div>
         </div>
@@ -55,19 +80,19 @@
             <span class="motion-icon">🎮</span>
         </button>
         <div class="motion-panel" id="motionPanel">
-            <div class="motion-header">GAME SETTINGS</div>
+            <div class="motion-header" data-text="motion_header">GAME SETTINGS</div>
             <div class="motion-options">
                 <button class="motion-option active" data-motion="full">
                     <span class="option-icon">⚡</span>
-                    <span class="option-text">FULL MOTION</span>
+                    <span class="option-text" data-text="motion_full">FULL MOTION</span>
                 </button>
                 <button class="motion-option" data-motion="reduced">
                     <span class="option-icon">🌊</span>
-                    <span class="option-text">GENTLE MODE</span>
+                    <span class="option-text" data-text="motion_reduced">GENTLE MODE</span>
                 </button>
                 <button class="motion-option" data-motion="minimal">
                     <span class="option-icon">🔇</span>
-                    <span class="option-text">FOCUS MODE</span>
+                    <span class="option-text" data-text="motion_minimal">FOCUS MODE</span>
                 </button>
             </div>
         </div>

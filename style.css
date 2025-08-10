@@ -53,6 +53,146 @@ body {
     image-rendering: crisp-edges;
 }
 
+/* Language Selection Screen */
+.language-screen {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: linear-gradient(135deg, var(--sky-blue) 0%, var(--mario-blue) 100%);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    z-index: 10001;
+    transition: opacity 0.5s ease-out;
+}
+
+.language-screen.hidden {
+    opacity: 0;
+    pointer-events: none;
+}
+
+.language-content {
+    text-align: center;
+    background: rgba(0, 0, 0, 0.8);
+    border: 4px solid var(--mario-white);
+    padding: 40px;
+    border-radius: 0;
+    box-shadow: 
+        0 0 0 4px var(--mario-black),
+        0 8px 16px rgba(0, 0, 0, 0.5);
+}
+
+.language-header {
+    margin-bottom: 30px;
+}
+
+.game-logo {
+    font-size: 24px;
+    color: var(--mario-yellow);
+    margin-bottom: 10px;
+    text-shadow: 
+        2px 2px 0px var(--mario-black),
+        -2px -2px 0px var(--mario-black),
+        2px -2px 0px var(--mario-black),
+        -2px 2px 0px var(--mario-black);
+    animation: logo-glow 2s ease-in-out infinite;
+}
+
+@keyframes logo-glow {
+    0%, 100% { text-shadow: 
+        2px 2px 0px var(--mario-black),
+        -2px -2px 0px var(--mario-black),
+        2px -2px 0px var(--mario-black),
+        -2px 2px 0px var(--mario-black); }
+    50% { text-shadow: 
+        2px 2px 0px var(--mario-black),
+        -2px -2px 0px var(--mario-black),
+        2px -2px 0px var(--mario-black),
+        -2px 2px 0px var(--mario-black),
+        0 0 10px var(--mario-yellow); }
+}
+
+.game-subtitle {
+    font-size: 8px;
+    color: var(--mario-white);
+    text-shadow: 1px 1px 0px var(--mario-black);
+}
+
+.select-title {
+    font-size: 12px;
+    color: var(--mario-white);
+    margin-bottom: 25px;
+    text-shadow: 1px 1px 0px var(--mario-black);
+}
+
+.language-options {
+    display: flex;
+    gap: 20px;
+    justify-content: center;
+}
+
+.language-btn {
+    background: var(--mario-green);
+    border: 3px solid var(--mario-white);
+    padding: 20px;
+    cursor: pointer;
+    font-family: var(--pixel-font);
+    color: var(--mario-white);
+    transition: all 0.2s ease;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 8px;
+    min-width: 120px;
+    box-shadow: 0 4px 0 var(--mario-black);
+}
+
+.language-btn:hover {
+    background: var(--mario-yellow);
+    color: var(--mario-black);
+    transform: translateY(1px);
+    box-shadow: 0 3px 0 var(--mario-black);
+}
+
+.language-btn:active {
+    transform: translateY(4px);
+    box-shadow: none;
+}
+
+.flag-icon {
+    font-size: 24px;
+    margin-bottom: 5px;
+}
+
+.lang-text {
+    font-size: 10px;
+    font-weight: bold;
+}
+
+.lang-desc {
+    font-size: 6px;
+    opacity: 0.8;
+}
+
+/* Mobile responsive */
+@media (max-width: 480px) {
+    .language-content {
+        padding: 30px 20px;
+        margin: 20px;
+    }
+    
+    .language-options {
+        flex-direction: column;
+        gap: 15px;
+    }
+    
+    .language-btn {
+        min-width: 150px;
+    }
+}
+
 /* Loading Screen */
 .loading-screen {
     position: fixed;
