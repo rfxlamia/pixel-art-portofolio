@@ -411,7 +411,7 @@ body {
     display: none;
     position: relative;
     min-height: calc(100vh - 160px);
-    padding: 40px 20px 60px 20px;
+    padding: 40px 20px 100px 20px;
 }
 
 /* Khusus untuk home section - sesuaikan dengan ukuran GIF */
@@ -925,7 +925,7 @@ body {
     position: relative;
     overflow: visible;
     contain: layout;
-    z-index: 1;
+    z-index: 10002;
 }
 
 .cert-card {
@@ -961,7 +961,7 @@ body {
 .cert-card.active {
     border-color: rgba(202, 8, 10, 0.8);
     background: rgba(202, 8, 10, 0.1);
-    z-index: 10000;
+    z-index: 10002;
 }
 
 .cert-icon {
@@ -1005,7 +1005,7 @@ body {
     visibility: hidden;
     transform: translateX(-50%) translateY(-20px);
     transition: all 0.3s ease;
-    z-index: 10001;
+    z-index: 10003;
 }
 
 .cert-dropdown.active {
