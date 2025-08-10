@@ -845,7 +845,7 @@ class PixelPortfolio {
         }
     }
     
-    // Smart Mobile Footer Management
+    // Smart Mobile Footer Management (Enhanced Sensitivity)
     setupMobileFooter() {
         if (window.innerWidth > 768) return; // Only for mobile
         
@@ -860,25 +860,25 @@ class PixelPortfolio {
             const windowHeight = window.innerHeight;
             const documentHeight = document.documentElement.scrollHeight;
             
-            // Show footer when near bottom or scrolling up
-            if (scrollTop < lastScrollTop || scrollTop + windowHeight >= documentHeight - 50) {
+            // Show footer when scrolling up or near bottom (more sensitive)
+            if (scrollTop < lastScrollTop || scrollTop + windowHeight >= documentHeight - 20) {
                 footer.classList.remove('hidden');
             } 
-            // Hide footer when scrolling down (but not at top)
-            else if (scrollTop > lastScrollTop && scrollTop > 100) {
+            // Hide footer when scrolling down (lower threshold for faster response)
+            else if (scrollTop > lastScrollTop && scrollTop > 50) {
                 footer.classList.add('hidden');
             }
             
             lastScrollTop = scrollTop <= 0 ? 0 : scrollTop;
         };
         
-        // Throttled scroll event
+        // More responsive scroll event (reduced delay)
         window.addEventListener('scroll', () => {
             if (scrollTimeout) return;
             scrollTimeout = setTimeout(() => {
                 handleScroll();
                 scrollTimeout = null;
-            }, 100);
+            }, 50); // Reduced from 100ms to 50ms
         });
         
         // Show footer on resize if changing to desktop
