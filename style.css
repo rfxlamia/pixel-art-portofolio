@@ -402,15 +402,15 @@ body {
 /* Main Game World */
 .game-world {
     margin-top: 60px;
-    margin-bottom: 0;
+    margin-bottom: 60px;
     position: relative;
-    min-height: calc(100vh - 60px);
+    min-height: calc(100vh - 120px);
 }
 
 .world-section {
     display: none;
     position: relative;
-    min-height: calc(100vh - 60px);
+    min-height: calc(100vh - 120px);
     padding: 40px 20px;
 }
 
