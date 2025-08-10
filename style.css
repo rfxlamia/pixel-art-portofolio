@@ -925,7 +925,7 @@ body {
     position: relative;
     overflow: visible;
     contain: layout;
-    z-index: 10002;
+    z-index: 1;
 }
 
 .cert-card {
@@ -961,7 +961,7 @@ body {
 .cert-card.active {
     border-color: rgba(202, 8, 10, 0.8);
     background: rgba(202, 8, 10, 0.1);
-    z-index: 10002;
+    z-index: 10000;
 }
 
 .cert-icon {
@@ -988,6 +988,11 @@ body {
     color: var(--mario-green);
 }
 
+/* Skills section extra bottom padding for certificate dropdowns */
+#skills {
+    padding-bottom: 120px;
+}
+
 /* Dropdown Effect untuk Certificates */
 .cert-dropdown {
     position: absolute;
@@ -1005,7 +1010,7 @@ body {
     visibility: hidden;
     transform: translateX(-50%) translateY(-20px);
     transition: all 0.3s ease;
-    z-index: 10003;
+    z-index: 10001;
 }
 
 .cert-dropdown.active {
@@ -1752,7 +1757,7 @@ body {
     }
     
     .world-section {
-        padding-bottom: 100px;
+        padding-bottom: 60px;
     }
     
     .game-ui {
