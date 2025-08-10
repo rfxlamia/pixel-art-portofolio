@@ -477,7 +477,6 @@ class PixelPortfolio {
         // Setup language selection event listeners
         languageButtons.forEach(btn => {
             btn.addEventListener('click', (e) => {
-                console.log('Language button clicked:', btn.dataset.lang); // Debug
                 const selectedLang = btn.dataset.lang;
                 this.selectLanguage(selectedLang);
                 this.playSound('menuClick');
@@ -486,21 +485,15 @@ class PixelPortfolio {
         
         // Preload images during language selection
         this.preloadImages();
-        
-        console.log('Language selection setup complete'); // Debug
     }
     
     selectLanguage(language) {
-        console.log('Selecting language:', language); // Debug
         this.currentLanguage = language;
         localStorage.setItem('selectedLanguage', language);
         
         // Hide language screen, show loading screen
         const languageScreen = document.getElementById('language-screen');
         const loadingScreen = document.getElementById('loading-screen');
-        
-        console.log('Language screen element:', languageScreen); // Debug
-        console.log('Loading screen element:', loadingScreen); // Debug
         
         languageScreen.classList.add('hidden');
         loadingScreen.style.display = 'flex';
@@ -511,17 +504,11 @@ class PixelPortfolio {
     
     async loadContent(language) {
         try {
-            console.log('Loading content for language:', language); // Debug
-            
             // For now, we'll use embedded content objects
             await this.loadContentFromFiles(language);
             
-            console.log('Content loaded:', this.content); // Debug
-            
             // Apply content to page
             this.applyContent();
-            
-            console.log('Content applied, starting loading sequence'); // Debug
             
             // Start loading sequence
             this.startLoadingSequence();
@@ -629,7 +616,6 @@ class PixelPortfolio {
                     { number: "3", label: "AI CERTIFICATIONS" },
                     { number: "8+", label: "PROJECTS DELIVERED" }
                 ]
-                // ... akan continue dengan content lainnya
             };
         }
     }
