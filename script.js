@@ -24,6 +24,7 @@ class PixelPortfolio {
         this.initializeBossHealth();
         this.setupFormValidation();
         this.startGameTimer();
+        this.setupMobileFooter();
     }
 
     // Loading Sequence
@@ -842,6 +843,50 @@ class PixelPortfolio {
         if (credits && this.content.credits) {
             credits.textContent = this.content.credits;
         }
+    }
+    
+    // Smart Mobile Footer Management
+    setupMobileFooter() {
+        if (window.innerWidth > 768) return; // Only for mobile
+        
+        const footer = document.querySelector('.game-footer');
+        if (!footer) return;
+        
+        let lastScrollTop = 0;
+        let scrollTimeout;
+        
+        const handleScroll = () => {
+            const scrollTop = window.pageYOffset || document.documentElement.scrollTop;
+            const windowHeight = window.innerHeight;
+            const documentHeight = document.documentElement.scrollHeight;
+            
+            // Show footer when near bottom or scrolling up
+            if (scrollTop < lastScrollTop || scrollTop + windowHeight >= documentHeight - 50) {
+                footer.classList.remove('hidden');
+            } 
+            // Hide footer when scrolling down (but not at top)
+            else if (scrollTop > lastScrollTop && scrollTop > 100) {
+                footer.classList.add('hidden');
+            }
+            
+            lastScrollTop = scrollTop <= 0 ? 0 : scrollTop;
+        };
+        
+        // Throttled scroll event
+        window.addEventListener('scroll', () => {
+            if (scrollTimeout) return;
+            scrollTimeout = setTimeout(() => {
+                handleScroll();
+                scrollTimeout = null;
+            }, 100);
+        });
+        
+        // Show footer on resize if changing to desktop
+        window.addEventListener('resize', () => {
+            if (window.innerWidth > 768) {
+                footer.classList.remove('hidden');
+            }
+        });
     }
     
     preloadImages() {

@@ -1605,6 +1605,11 @@ body {
     border-top: 4px solid var(--mario-white);
     padding: 15px 0;
     z-index: 1000;
+    transition: transform 0.3s ease-out;
+}
+
+.game-footer.hidden {
+    transform: translateY(100%);
 }
 
 .footer-content {
@@ -1742,6 +1747,14 @@ body {
 }
 
 @media (max-width: 768px) {
+    .game-world {
+        margin-bottom: 120px;
+    }
+    
+    .world-section {
+        padding-bottom: 100px;
+    }
+    
     .game-ui {
         flex-wrap: wrap;
         gap: 10px;
