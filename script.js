@@ -40,7 +40,12 @@ class PixelPortfolio {
                 clearInterval(loadingInterval);
                 
                 setTimeout(() => {
-                    loadingScreen.classList.add('hidden');
+                    loadingScreen.style.display = 'none';
+                    
+                    // Show main portfolio content
+                    document.querySelector('.game-header').style.display = 'block';
+                    document.querySelector('.game-world').style.display = 'block';
+                    
                     this.gameStarted = true;
                     this.playSound('gameStart');
                     this.animateSkillBars();
@@ -452,7 +457,11 @@ class PixelPortfolio {
         const languageScreen = document.getElementById('language-screen');
         const languageButtons = document.querySelectorAll('.language-btn');
         
-        // Check for saved language preference
+        // TEMPORARY: Clear localStorage for testing
+        localStorage.removeItem('selectedLanguage');
+        
+        // For testing, comment out localStorage check temporarily
+        /*
         const savedLanguage = localStorage.getItem('selectedLanguage');
         if (savedLanguage) {
             this.currentLanguage = savedLanguage;
@@ -462,6 +471,7 @@ class PixelPortfolio {
             this.loadContent(savedLanguage);
             return;
         }
+        */
         
         // Setup language selection event listeners
         languageButtons.forEach(btn => {
@@ -475,6 +485,8 @@ class PixelPortfolio {
         
         // Preload images during language selection
         this.preloadImages();
+        
+        console.log('Language selection setup complete'); // Debug
     }
     
     selectLanguage(language) {
@@ -490,7 +502,7 @@ class PixelPortfolio {
         console.log('Loading screen element:', loadingScreen); // Debug
         
         languageScreen.classList.add('hidden');
-        loadingScreen.classList.remove('hidden');
+        loadingScreen.style.display = 'flex';
         
         // Load content and start sequence
         this.loadContent(language);
