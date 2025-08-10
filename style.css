@@ -345,12 +345,14 @@ body {
 
 /* Navigation */
 .game-nav {
-    position: relative;
+    position: fixed;
+    top: 60px;
+    left: 0;
     width: 100%;
     background: var(--mario-dark-blue);
     border-bottom: 4px solid var(--mario-white);
-    border-top: 4px solid var(--mario-white);
-    z-index: 10;
+    border-top: 0;
+    z-index: 999;
     padding: 10px 0;
 }
 
@@ -402,16 +404,16 @@ body {
 
 /* Main Game World */
 .game-world {
-    margin-top: 60px;
+    margin-top: 110px;
     margin-bottom: 0;
     position: relative;
-    min-height: calc(100vh - 60px);
+    min-height: calc(100vh - 110px);
 }
 
 .world-section {
     display: none;
     position: relative;
-    min-height: calc(100vh - 60px);
+    min-height: calc(100vh - 110px);
     padding: 40px 20px;
 }
 
