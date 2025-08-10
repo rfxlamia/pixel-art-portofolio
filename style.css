@@ -416,8 +416,9 @@ body {
 
 /* Khusus untuk home section - sesuaikan dengan ukuran GIF */
 #home {
-    height: 340px;
-    padding: 0 !important;
+    min-height: calc(100vh - 160px);
+    height: auto;
+    padding: 40px 20px 60px 20px !important;
     margin: 0 !important;
     overflow-y: auto;
     overflow-x: hidden;
@@ -425,6 +426,9 @@ body {
     background-size: 100% 100%;
     position: relative;
     z-index: 1;
+    display: flex;
+    align-items: center;
+    justify-content: center;
 }
 
 /* Custom scrollbar untuk section home */
