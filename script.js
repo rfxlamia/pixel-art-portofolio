@@ -565,8 +565,44 @@ class PixelPortfolio {
                     { number: "7+", label: "KLIEN AKTIF" },
                     { number: "3", label: "SERTIFIKASI AI" },
                     { number: "8+", label: "PROYEK SELESAI" }
-                ]
-                // ... akan continue dengan content lainnya
+                ],
+                // About section
+                section_title_about: "PROFIL PEMAIN",
+                level_indicator_about: "DUNIA 1-2",
+                character_name: "RAFI \"V\" | RFXLAMIA",
+                character_class: "PENGEMBANG AI & INOVATOR LEGAL TECH",
+                bio_text: "Mahasiswa hukum dengan passion mendalam pada etika AI. Perpaduan unik kepakaran hukum dan keterampilan teknis AI untuk membangun solusi teknologi yang bukan hanya inovatif, tapi juga etis dan patuh hukum.",
+                achievements_title: "PENCAPAIAN TERBUKA",
+                // Skills section  
+                section_title_skills: "STATISTIK KARAKTER",
+                level_indicator_skills: "DUNIA 1-3",
+                technical_abilities_title: "KEAHLIAN TEKNIS",
+                certifications_title: "SERTIFIKASI KHUSUS",
+                power_ups_title: "PENINGKATAN KEMAMPUAN",
+                // Projects section
+                section_title_projects: "DAFTAR MISI",
+                level_indicator_projects: "DUNIA 1-4",
+                // Contact section
+                section_title_contact: "PERTEMPURAN BOSS",
+                level_indicator_contact: "TAHAP AKHIR",
+                boss_health_label: "BOSS KOLABORASI",
+                form_header: "KALAHKAN BOSS DENGAN PESANMU!",
+                form_description: "Kirim proposal kolaborasi untuk mengurangi HP bos!",
+                name_label: "NAMA",
+                email_label: "ALAMAT EMAIL",
+                project_label: "JENIS PROYEK",
+                project_placeholder: "Pilih misimu...",
+                message_label: "STRATEGI BERTARUNG (PESAN)",
+                message_placeholder: "Jelaskan proyek, kebutuhan, dan cara kita bisa kolaborasi...",
+                submit_button: "LUNCURKAN SERANGAN!",
+                victory_title: "BOSS TERKALAHKAN! 🎉",
+                victory_text_1: "Pesanmu berhasil terkirim!",
+                victory_text_2: "Rafi akan membalas proposal kolaborasimu segera.",
+                contact_link_text: "linktr.ee/rfxlamia",
+                // Footer
+                copyright: "© 2025 RAFI \"V\" | RFXLAMIA",
+                social_text: "LINKTR.EE/RFXLAMIA",
+                credits: "DIDUKUNG OLEH MSSTROMLABS"
             };
         } else {
             return {
@@ -610,7 +646,12 @@ class PixelPortfolio {
         this.updateGameHeader();
         this.updateNavigation(); 
         this.updateStats();
-        // ... akan continue dengan sections lainnya
+        this.updateSectionTitles();
+        this.updateAboutSection();
+        this.updateSkillsSection();
+        this.updateProjectsSection();
+        this.updateContactSection();
+        this.updateFooter();
     }
     
     updateGameHeader() {
@@ -645,6 +686,162 @@ class PixelPortfolio {
                 if (labelEl) labelEl.textContent = this.content.stats[index].label;
             }
         });
+    }
+    
+    updateSectionTitles() {
+        // About section title
+        const aboutTitle = document.querySelector('#about .section-title');
+        if (aboutTitle && this.content.section_title_about) {
+            aboutTitle.textContent = this.content.section_title_about;
+        }
+        
+        // Skills section title  
+        const skillsTitle = document.querySelector('#skills .section-title');
+        if (skillsTitle && this.content.section_title_skills) {
+            skillsTitle.textContent = this.content.section_title_skills;
+        }
+        
+        // Projects section title
+        const projectsTitle = document.querySelector('#projects .section-title');
+        if (projectsTitle && this.content.section_title_projects) {
+            projectsTitle.textContent = this.content.section_title_projects;
+        }
+        
+        // Contact section title
+        const contactTitle = document.querySelector('#contact .section-title');
+        if (contactTitle && this.content.section_title_contact) {
+            contactTitle.textContent = this.content.section_title_contact;
+        }
+    }
+    
+    updateAboutSection() {
+        // Character details
+        const characterName = document.querySelector('.character-name');
+        if (characterName && this.content.character_name) {
+            characterName.textContent = this.content.character_name;
+        }
+        
+        const characterClass = document.querySelector('.character-class');
+        if (characterClass && this.content.character_class) {
+            characterClass.textContent = this.content.character_class;
+        }
+        
+        const bioText = document.querySelector('.bio-text');
+        if (bioText && this.content.bio_text) {
+            bioText.textContent = this.content.bio_text;
+        }
+        
+        const achievementsTitle = document.querySelector('.achievements-title');
+        if (achievementsTitle && this.content.achievements_title) {
+            achievementsTitle.textContent = this.content.achievements_title;
+        }
+    }
+    
+    updateSkillsSection() {
+        const techAbilitiesTitle = document.querySelector('#skills .category-title');
+        if (techAbilitiesTitle && this.content.technical_abilities_title) {
+            techAbilitiesTitle.textContent = this.content.technical_abilities_title;
+        }
+        
+        const certificationsTitles = document.querySelectorAll('#skills .category-title');
+        if (certificationsTitles[1] && this.content.certifications_title) {
+            certificationsTitles[1].textContent = this.content.certifications_title;
+        }
+        
+        const powerUpsTitles = document.querySelectorAll('#skills .category-title');
+        if (powerUpsTitles[2] && this.content.power_ups_title) {
+            powerUpsTitles[2].textContent = this.content.power_ups_title;
+        }
+    }
+    
+    updateProjectsSection() {
+        // Projects section already handled by section titles
+    }
+    
+    updateContactSection() {
+        const bossHealthLabel = document.querySelector('.health-label');
+        if (bossHealthLabel && this.content.boss_health_label) {
+            bossHealthLabel.textContent = this.content.boss_health_label;
+        }
+        
+        const formHeader = document.querySelector('.form-header h3');
+        if (formHeader && this.content.form_header) {
+            formHeader.textContent = this.content.form_header;
+        }
+        
+        const formDescription = document.querySelector('.form-header p');
+        if (formDescription && this.content.form_description) {
+            formDescription.textContent = this.content.form_description;
+        }
+        
+        // Form labels
+        const nameLabel = document.querySelector('label[for="name"]');
+        if (nameLabel && this.content.name_label) {
+            nameLabel.textContent = this.content.name_label;
+        }
+        
+        const emailLabel = document.querySelector('label[for="email"]');
+        if (emailLabel && this.content.email_label) {
+            emailLabel.textContent = this.content.email_label;
+        }
+        
+        const projectLabel = document.querySelector('label[for="project"]');
+        if (projectLabel && this.content.project_label) {
+            projectLabel.textContent = this.content.project_label;
+        }
+        
+        const messageLabel = document.querySelector('label[for="message"]');
+        if (messageLabel && this.content.message_label) {
+            messageLabel.textContent = this.content.message_label;
+        }
+        
+        // Form placeholders
+        const projectSelect = document.querySelector('#project option[value=""]');
+        if (projectSelect && this.content.project_placeholder) {
+            projectSelect.textContent = this.content.project_placeholder;
+        }
+        
+        const messageTextarea = document.querySelector('#message');
+        if (messageTextarea && this.content.message_placeholder) {
+            messageTextarea.placeholder = this.content.message_placeholder;
+        }
+        
+        // Submit button
+        const submitButton = document.querySelector('.attack-text');
+        if (submitButton && this.content.submit_button) {
+            submitButton.textContent = this.content.submit_button;
+        }
+        
+        // Victory messages
+        const victoryTitle = document.querySelector('.victory-content h3');
+        if (victoryTitle && this.content.victory_title) {
+            victoryTitle.textContent = this.content.victory_title;
+        }
+        
+        const victoryTexts = document.querySelectorAll('.victory-content p');
+        if (victoryTexts[0] && this.content.victory_text_1) {
+            victoryTexts[0].textContent = this.content.victory_text_1;
+        }
+        if (victoryTexts[1] && this.content.victory_text_2) {
+            victoryTexts[1].textContent = this.content.victory_text_2;
+        }
+    }
+    
+    updateFooter() {
+        const copyright = document.querySelector('.copyright span');
+        if (copyright && this.content.copyright) {
+            copyright.textContent = this.content.copyright;
+        }
+        
+        const socialText = document.querySelector('.social-text');
+        if (socialText && this.content.social_text) {
+            socialText.textContent = this.content.social_text;
+        }
+        
+        const credits = document.querySelector('.credits-text');
+        if (credits && this.content.credits) {
+            credits.textContent = this.content.credits;
+        }
     }
     
     preloadImages() {
