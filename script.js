@@ -860,8 +860,8 @@ class PixelPortfolio {
             const windowHeight = window.innerHeight;
             const documentHeight = document.documentElement.scrollHeight;
             
-            // Show footer when scrolling up or near bottom (more sensitive)
-            if (scrollTop < lastScrollTop || scrollTop + windowHeight >= documentHeight - 20) {
+            // Show footer when scrolling up or near bottom
+            if (scrollTop < lastScrollTop || scrollTop + windowHeight >= documentHeight - 50) {
                 footer.classList.remove('hidden');
             } 
             // Hide footer when scrolling down (lower threshold for faster response)
