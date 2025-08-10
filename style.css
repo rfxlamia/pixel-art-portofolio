@@ -1875,6 +1875,15 @@ body.motion-reduced .pixel-mario {
     animation: mario-idle 4s ease-in-out infinite !important;
 }
 
+/* Language screen motion handling */
+body.motion-reduced .game-logo {
+    animation: none !important;
+}
+
+body.motion-minimal .game-logo {
+    animation: none !important;
+}
+
 body.motion-reduced .loading-text {
     animation: text-fade 2s ease-in-out infinite !important;
 }

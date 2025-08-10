@@ -456,6 +456,9 @@ class PixelPortfolio {
         const savedLanguage = localStorage.getItem('selectedLanguage');
         if (savedLanguage) {
             this.currentLanguage = savedLanguage;
+            // Hide language screen immediately
+            languageScreen.classList.add('hidden');
+            document.getElementById('loading-screen').classList.remove('hidden');
             this.loadContent(savedLanguage);
             return;
         }
@@ -463,6 +466,7 @@ class PixelPortfolio {
         // Setup language selection event listeners
         languageButtons.forEach(btn => {
             btn.addEventListener('click', (e) => {
+                console.log('Language button clicked:', btn.dataset.lang); // Debug
                 const selectedLang = btn.dataset.lang;
                 this.selectLanguage(selectedLang);
                 this.playSound('menuClick');
@@ -474,12 +478,16 @@ class PixelPortfolio {
     }
     
     selectLanguage(language) {
+        console.log('Selecting language:', language); // Debug
         this.currentLanguage = language;
         localStorage.setItem('selectedLanguage', language);
         
         // Hide language screen, show loading screen
         const languageScreen = document.getElementById('language-screen');
         const loadingScreen = document.getElementById('loading-screen');
+        
+        console.log('Language screen element:', languageScreen); // Debug
+        console.log('Loading screen element:', loadingScreen); // Debug
         
         languageScreen.classList.add('hidden');
         loadingScreen.classList.remove('hidden');
@@ -490,21 +498,24 @@ class PixelPortfolio {
     
     async loadContent(language) {
         try {
-            // Construct content URLs - you'll need to serve these files
-            const contentUrl = `./content/portfolio-content-${language}.json`;
+            console.log('Loading content for language:', language); // Debug
             
             // For now, we'll use embedded content objects
             await this.loadContentFromFiles(language);
             
+            console.log('Content loaded:', this.content); // Debug
+            
             // Apply content to page
             this.applyContent();
+            
+            console.log('Content applied, starting loading sequence'); // Debug
             
             // Start loading sequence
             this.startLoadingSequence();
             
         } catch (error) {
             console.error('Failed to load content:', error);
-            // Fallback to embedded content
+            // Fallback to embedded content  
             this.loadEmbeddedContent(language);
             this.applyContent();
             this.startLoadingSequence();
@@ -515,6 +526,7 @@ class PixelPortfolio {
         // For production, you'd fetch from markdown files
         // For now, we'll create embedded content objects based on the markdown structure
         this.content = this.getEmbeddedContent(language);
+        return Promise.resolve(); // Ensure this returns a resolved promise
     }
     
     getEmbeddedContent(language) {
