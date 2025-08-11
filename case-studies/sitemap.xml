@@ -1,0 +1,75 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9"
+        xmlns:image="http://www.google.com/schemas/sitemap-image/1.1">
+  
+  <!-- Case Studies Main Page -->
+  <url>
+    <loc>https://rfxlamia.space/case-studies/</loc>
+    <lastmod>2025-01-10</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.9</priority>
+    <image:image>
+      <image:loc>https://i.imgur.com/H6so7ce.png</image:loc>
+      <image:caption>Rafi V AI Developer Case Studies</image:caption>
+      <image:title>AI Developer Portfolio Case Studies</image:title>
+    </image:image>
+  </url>
+  
+  <!-- Case Studies Index -->
+  <url>
+    <loc>https://rfxlamia.space/case-studies/index.html</loc>
+    <lastmod>2025-01-10</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.9</priority>
+  </url>
+  
+  <!-- Buddy Platform Case Study -->
+  <url>
+    <loc>https://rfxlamia.space/case-studies/projects/buddy-platform.html</loc>
+    <lastmod>2025-01-10</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.8</priority>
+    <image:image>
+      <image:loc>https://i.imgur.com/H6so7ce.png</image:loc>
+      <image:caption>Buddy Platform Mental Health Tech Case Study</image:caption>
+      <image:title>Buddy Platform - Mental Health Tech Ecosystem</image:title>
+    </image:image>
+  </url>
+  
+  <!-- Future Case Studies (will be updated when available) -->
+  <url>
+    <loc>https://rfxlamia.space/case-studies/projects/business-automation-suite.html</loc>
+    <lastmod>2025-01-10</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.7</priority>
+  </url>
+  
+  <url>
+    <loc>https://rfxlamia.space/case-studies/projects/agent-vocana.html</loc>
+    <lastmod>2025-01-10</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.7</priority>
+  </url>
+  
+  <url>
+    <loc>https://rfxlamia.space/case-studies/projects/agent-custos.html</loc>
+    <lastmod>2025-01-10</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.7</priority>
+  </url>
+  
+  <url>
+    <loc>https://rfxlamia.space/case-studies/projects/ms-strom.html</loc>
+    <lastmod>2025-01-10</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.7</priority>
+  </url>
+  
+  <url>
+    <loc>https://rfxlamia.space/case-studies/projects/content-toolkit.html</loc>
+    <lastmod>2025-01-10</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.7</priority>
+  </url>
+
+</urlset>

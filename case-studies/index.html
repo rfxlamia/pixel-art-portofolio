@@ -1,0 +1,549 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Case Studies - Rafi "V" | AI Developer & Legal Tech Innovator</title>
+    <meta name="description" content="Comprehensive case studies of AI development projects by Rafi V - featuring Buddy Platform, Business Automation Suite, Agent Vocana, Agent Custos, Ms.Strom, and Content Tools.">
+    <meta name="keywords" content="AI Case Studies, Legal Tech Projects, Business Automation, Constitutional AI, Mental Health Tech, Indonesia AI Developer">
+    
+    <!-- Open Graph Meta Tags -->
+    <meta property="og:title" content="Case Studies - Rafi V AI Developer Portfolio">
+    <meta property="og:description" content="Explore detailed case studies of 6 major AI projects including Buddy Platform, Agent Vocana, and Business Automation Suite.">
+    <meta property="og:type" content="website">
+    <meta property="og:url" content="https://rfxlamia.space/case-studies/">
+    <meta property="og:image" content="https://i.imgur.com/H6so7ce.png">
+    
+    <!-- Twitter Card Meta Tags -->
+    <meta name="twitter:card" content="summary_large_image">
+    <meta name="twitter:title" content="Case Studies - Rafi V AI Developer">
+    <meta name="twitter:description" content="Comprehensive AI project case studies with technical deep-dives and business impact analysis.">
+    <meta name="twitter:image" content="https://i.imgur.com/H6so7ce.png">
+    
+    <link rel="stylesheet" href="styles/case-study.css">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Press+Start+2P&display=swap" rel="stylesheet">
+    <link rel="manifest" href="../manifest.json">
+    
+    <!-- Structured Data -->
+    <script type="application/ld+json">
+    {
+        "@context": "https://schema.org",
+        "@type": "WebSite",
+        "name": "Rafi V Case Studies",
+        "description": "Professional case studies of AI development projects",
+        "url": "https://rfxlamia.space/case-studies/",
+        "author": {
+            "@type": "Person",
+            "name": "Rafi V",
+            "alternateName": "rfxlamia",
+            "description": "AI Developer & Legal Tech Innovator"
+        }
+    }
+    </script>
+</head>
+<body>
+    <!-- Language Selection Screen -->
+    <div id="language-screen" class="language-screen">
+        <div class="language-content">
+            <div class="language-header">
+                <div class="game-logo">CASE STUDIES</div>
+                <div class="game-subtitle">RAFI "V" PROJECT PORTFOLIO</div>
+            </div>
+            <div class="language-selection">
+                <h2 class="select-title">SELECT LANGUAGE / PILIH BAHASA</h2>
+                <div class="language-options">
+                    <button class="language-btn" data-lang="en" id="lang-en">
+                        <span class="flag-icon">🇺🇸</span>
+                        <span class="lang-text">ENGLISH</span>
+                        <span class="lang-desc">International</span>
+                    </button>
+                    <button class="language-btn" data-lang="id" id="lang-id">
+                        <span class="flag-icon">🇮🇩</span>
+                        <span class="lang-text">BAHASA INDONESIA</span>
+                        <span class="lang-desc">Lokal</span>
+                    </button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Loading Screen -->
+    <div id="loading-screen" class="loading-screen" style="display: none;">
+        <div class="loading-content">
+            <div class="pixel-mario"></div>
+            <div class="loading-text" data-text="loading_text">LOADING CASE STUDIES...</div>
+            <div class="loading-bar">
+                <div class="loading-progress"></div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Game UI Header -->
+    <header class="game-header" style="display: none;">
+        <div class="game-ui">
+            <div class="player-info">
+                <span class="player-name">RAFI "V"</span>
+                <div class="lives">
+                    <span class="life-icon">♥</span>
+                    <span class="life-icon">♥</span>
+                    <span class="life-icon">♥</span>
+                </div>
+            </div>
+            <div class="score">
+                <span class="score-label" data-text="score_label">CASE STUDIES</span>
+                <span class="score-value" id="score">0006000</span>
+            </div>
+            <div class="world-info">
+                <span class="world-label" data-text="world_label">PROJECTS</span>
+                <span class="world-value">2-1</span>
+            </div>
+            <div class="back-btn">
+                <a href="../index.html" class="back-link" data-text="back_btn">← BACK TO MAIN</a>
+            </div>
+        </div>
+    </header>
+
+    <!-- Motion Control Panel -->
+    <div class="motion-control" id="motionControl">
+        <button class="motion-btn" id="motionBtn" title="Motion Settings">
+            <span class="motion-icon">🎮</span>
+        </button>
+        <div class="motion-panel" id="motionPanel">
+            <div class="motion-header" data-text="motion_header">GAME SETTINGS</div>
+            <div class="motion-options">
+                <button class="motion-option active" data-motion="full">
+                    <span class="option-icon">⚡</span>
+                    <span class="option-text" data-text="motion_full">FULL MOTION</span>
+                </button>
+                <button class="motion-option" data-motion="reduced">
+                    <span class="option-icon">🌊</span>
+                    <span class="option-text" data-text="motion_reduced">GENTLE MODE</span>
+                </button>
+                <button class="motion-option" data-motion="minimal">
+                    <span class="option-icon">🔇</span>
+                    <span class="option-text" data-text="motion_minimal">FOCUS MODE</span>
+                </button>
+            </div>
+        </div>
+    </div>
+
+    <!-- Main Case Studies Area -->
+    <main class="case-studies-world" style="display: none;">
+        
+        <!-- Navigation Menu -->
+        <nav class="case-nav" id="caseNav">
+            <div class="nav-container">
+                <button class="nav-btn active" data-section="overview">📊 OVERVIEW</button>
+                <button class="nav-btn" data-section="projects">🎮 PROJECTS</button>
+                <button class="nav-btn" data-section="about">ℹ️ ABOUT</button>
+            </div>
+        </nav>
+        
+        <!-- OVERVIEW SECTION -->
+        <section id="overview" class="case-section active">
+            <div class="section-background overview-bg"></div>
+            
+            <div class="overview-content">
+                <div class="section-header">
+                    <h1 class="section-title" data-text="overview_title">PROJECT PORTFOLIO</h1>
+                    <div class="level-indicator">CASE STUDIES</div>
+                </div>
+
+                <div class="hero-section">
+                    <div class="character-showcase">
+                        <img src="https://i.imgur.com/H6so7ce.png" alt="Rafi Pixel Art" class="hero-character">
+                        <div class="character-shadow"></div>
+                    </div>
+                    
+                    <div class="hero-content">
+                        <div class="intro-block">
+                            <h2 class="hero-title" data-text="hero_title">COMPREHENSIVE PROJECT CASE STUDIES</h2>
+                            <p class="hero-description" data-text="hero_description">
+                                Explore detailed technical documentation, business impact analysis, and implementation insights 
+                                from 6 major AI development projects spanning Legal Tech, Mental Health, Business Automation, and AI Ethics.
+                            </p>
+                        </div>
+                        
+                        <div class="portfolio-stats">
+                            <div class="stat-card">
+                                <span class="stat-number">6</span>
+                                <span class="stat-label" data-text="stat_projects">MAJOR PROJECTS</span>
+                            </div>
+                            <div class="stat-card">
+                                <span class="stat-number">7+</span>
+                                <span class="stat-label" data-text="stat_clients">ACTIVE CLIENTS</span>
+                            </div>
+                            <div class="stat-card">
+                                <span class="stat-number">130M+</span>
+                                <span class="stat-label" data-text="stat_users">POTENTIAL USERS</span>
+                            </div>
+                        </div>
+
+                        <div class="cta-section">
+                            <button class="explore-btn" onclick="navigateToSection('projects')">
+                                <span class="btn-text" data-text="explore_btn">EXPLORE PROJECTS</span>
+                                <span class="btn-arrow">▶</span>
+                            </button>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="technology-showcase">
+                    <h3 class="tech-title" data-text="tech_title">CORE TECHNOLOGIES</h3>
+                    <div class="tech-grid">
+                        <div class="tech-item">
+                            <div class="tech-icon">🧠</div>
+                            <span class="tech-name">Constitutional AI</span>
+                        </div>
+                        <div class="tech-item">
+                            <div class="tech-icon">⚖️</div>
+                            <span class="tech-name">Legal Tech</span>
+                        </div>
+                        <div class="tech-item">
+                            <div class="tech-icon">🤖</div>
+                            <span class="tech-name">Business Automation</span>
+                        </div>
+                        <div class="tech-item">
+                            <div class="tech-icon">💚</div>
+                            <span class="tech-name">Mental Health Tech</span>
+                        </div>
+                        <div class="tech-item">
+                            <div class="tech-icon">🛡️</div>
+                            <span class="tech-name">AI Ethics</span>
+                        </div>
+                        <div class="tech-item">
+                            <div class="tech-icon">🔄</div>
+                            <span class="tech-name">Multi-Modal AI</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- PROJECTS SECTION -->
+        <section id="projects" class="case-section">
+            <div class="section-background projects-bg"></div>
+            
+            <div class="projects-content">
+                <div class="section-header">
+                    <h2 class="section-title" data-text="projects_title">PROJECT CASE STUDIES</h2>
+                    <div class="level-indicator">6 MAJOR PROJECTS</div>
+                </div>
+
+                <div class="projects-grid">
+                    <!-- Project 1: Buddy Platform -->
+                    <div class="project-card featured" data-project="buddy">
+                        <div class="project-header">
+                            <div class="project-number">01</div>
+                            <div class="project-status mental-health">MENTAL HEALTH</div>
+                        </div>
+                        <div class="project-content">
+                            <h3 class="project-title">BUDDY PLATFORM</h3>
+                            <div class="project-subtitle">Mental Health Tech Ecosystem</div>
+                            <p class="project-description">
+                                Evidence-based peer support platform with OARS+GROWCS methodology, 
+                                14-step gold standard training, and privacy-first infrastructure targeting 89M Indonesian youth.
+                            </p>
+                            <div class="project-tags">
+                                <span class="tag">HIPAA-GDPR COMPLIANT</span>
+                                <span class="tag">PLUTCHIK'S EMOTIONS</span>
+                                <span class="tag">PEER SUPPORT AI</span>
+                            </div>
+                            <div class="project-stats">
+                                <div class="project-stat">
+                                    <span class="stat-value">89M</span>
+                                    <span class="stat-desc">Target Users</span>
+                                </div>
+                                <div class="project-stat">
+                                    <span class="stat-value">24/7</span>
+                                    <span class="stat-desc">Support</span>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="project-footer">
+                            <button class="view-case-btn" onclick="openCaseStudy('buddy')">
+                                📋 <span data-text="view_case">VIEW CASE STUDY</span>
+                            </button>
+                        </div>
+                    </div>
+
+                    <!-- Project 2: Business Automation Suite -->
+                    <div class="project-card production" data-project="automation">
+                        <div class="project-header">
+                            <div class="project-number">02</div>
+                            <div class="project-status automation">PRODUCTION</div>
+                        </div>
+                        <div class="project-content">
+                            <h3 class="project-title">BUSINESS AUTOMATION SUITE</h3>
+                            <div class="project-subtitle">Enterprise-Grade Multi-Modal Automation</div>
+                            <p class="project-description">
+                                4-pillar automation framework: AI content generation, WhatsApp customer service, 
+                                HR recruitment automation, and payment processing with 8+ API integrations.
+                            </p>
+                            <div class="project-tags">
+                                <span class="tag">N8N WORKFLOWS</span>
+                                <span class="tag">8+ API INTEGRATIONS</span>
+                                <span class="tag">MULTI-MODAL AI</span>
+                            </div>
+                            <div class="project-stats">
+                                <div class="project-stat">
+                                    <span class="stat-value">7+</span>
+                                    <span class="stat-desc">Active Clients</span>
+                                </div>
+                                <div class="project-stat">
+                                    <span class="stat-value">4</span>
+                                    <span class="stat-desc">Core Pillars</span>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="project-footer">
+                            <button class="view-case-btn" onclick="openCaseStudy('automation')">
+                                📋 <span data-text="view_case">VIEW CASE STUDY</span>
+                            </button>
+                        </div>
+                    </div>
+
+                    <!-- Project 3: Agent Vocana -->
+                    <div class="project-card research" data-project="vocana">
+                        <div class="project-header">
+                            <div class="project-number">03</div>
+                            <div class="project-status legal-tech">LEGAL TECH</div>
+                        </div>
+                        <div class="project-content">
+                            <h3 class="project-title">AGENT VOCANA</h3>
+                            <div class="project-subtitle">Constitutional AI - Employment Law</div>
+                            <p class="project-description">
+                                Project Aequitas flagship: Revolutionary Constitutional AI for Indonesian 
+                                employment law with 6-layer legal embedding and anti-hallucination framework.
+                            </p>
+                            <div class="project-tags">
+                                <span class="tag">CONSTITUTIONAL AI</span>
+                                <span class="tag">6-LAYER EMBEDDING</span>
+                                <span class="tag">ANTI-HALLUCINATION</span>
+                            </div>
+                            <div class="project-stats">
+                                <div class="project-stat">
+                                    <span class="stat-value">130M</span>
+                                    <span class="stat-desc">Workers Affected</span>
+                                </div>
+                                <div class="project-stat">
+                                    <span class="stat-value">69-88%</span>
+                                    <span class="stat-desc">Hallucination Reduction</span>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="project-footer">
+                            <button class="view-case-btn" onclick="openCaseStudy('vocana')">
+                                📋 <span data-text="view_case">VIEW CASE STUDY</span>
+                            </button>
+                        </div>
+                    </div>
+
+                    <!-- Project 4: Agent Custos -->
+                    <div class="project-card framework" data-project="custos">
+                        <div class="project-header">
+                            <div class="project-number">04</div>
+                            <div class="project-status ai-ethics">AI ETHICS</div>
+                        </div>
+                        <div class="project-content">
+                            <h3 class="project-title">AGENT CUSTOS</h3>
+                            <div class="project-subtitle">Constitutional Guardian</div>
+                            <p class="project-description">
+                                The "moral compass" of Project Aequitas: Constitutional AI framework for 
+                                bias detection, transparency auditing, and Indonesian constitutional compliance.
+                            </p>
+                            <div class="project-tags">
+                                <span class="tag">BIAS DETECTION</span>
+                                <span class="tag">TRANSPARENCY AUDIT</span>
+                                <span class="tag">CONSTITUTIONAL AI</span>
+                            </div>
+                            <div class="project-stats">
+                                <div class="project-stat">
+                                    <span class="stat-value">100%</span>
+                                    <span class="stat-desc">Constitutional Compliance</span>
+                                </div>
+                                <div class="project-stat">
+                                    <span class="stat-value">AI</span>
+                                    <span class="stat-desc">Ethics Framework</span>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="project-footer">
+                            <button class="view-case-btn" onclick="openCaseStudy('custos')">
+                                📋 <span data-text="view_case">VIEW CASE STUDY</span>
+                            </button>
+                        </div>
+                    </div>
+
+                    <!-- Project 5: Ms.Strom -->
+                    <div class="project-card special" data-project="msstrom">
+                        <div class="project-header">
+                            <div class="project-number">05</div>
+                            <div class="project-status research">RESEARCH</div>
+                        </div>
+                        <div class="project-content">
+                            <h3 class="project-title">MS.STROM</h3>
+                            <div class="project-subtitle">Anti-Toxic Positivity AI Research</div>
+                            <p class="project-description">
+                                Revolutionary AI personality framework addressing toxic positivity epidemic 
+                                with intellectual filtering system and authentic Indonesian cultural integration.
+                            </p>
+                            <div class="project-tags">
+                                <span class="tag">ANTI-TOXIC POSITIVITY</span>
+                                <span class="tag">CULTURAL AI</span>
+                                <span class="tag">INTELLECTUAL FILTERING</span>
+                            </div>
+                            <div class="project-stats">
+                                <div class="project-stat">
+                                    <span class="stat-value">AI</span>
+                                    <span class="stat-desc">Personality Research</span>
+                                </div>
+                                <div class="project-stat">
+                                    <span class="stat-value">ID</span>
+                                    <span class="stat-desc">Cultural Integration</span>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="project-footer">
+                            <button class="view-case-btn" onclick="openCaseStudy('msstrom')">
+                                📋 <span data-text="view_case">VIEW CASE STUDY</span>
+                            </button>
+                        </div>
+                    </div>
+
+                    <!-- Project 6: Content Tools -->
+                    <div class="project-card toolkit" data-project="content">
+                        <div class="project-header">
+                            <div class="project-number">06</div>
+                            <div class="project-status content-tools">CONTENT TOOLS</div>
+                        </div>
+                        <div class="project-content">
+                            <h3 class="project-title">CONTENT TOOLKIT</h3>
+                            <div class="project-subtitle">Creator Pipeline Ecosystem</div>
+                            <p class="project-description">
+                                Powered by Trend Harvester, Script Foundry, Super Content Generator - 
+                                integrated 3-tool pipeline automating content research → generation → optimization workflow.
+                            </p>
+                            <div class="project-tags">
+                                <span class="tag">CONTENT PIPELINE</span>
+                                <span class="tag">3-TOOL ECOSYSTEM</span>
+                                <span class="tag">TREND ANALYSIS</span>
+                            </div>
+                            <div class="project-stats">
+                                <div class="project-stat">
+                                    <span class="stat-value">3</span>
+                                    <span class="stat-desc">Integrated Tools</span>
+                                </div>
+                                <div class="project-stat">
+                                    <span class="stat-value">AUTO</span>
+                                    <span class="stat-desc">Content Generation</span>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="project-footer">
+                            <button class="view-case-btn" onclick="openCaseStudy('content')">
+                                📋 <span data-text="view_case">VIEW CASE STUDY</span>
+                            </button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- ABOUT SECTION -->
+        <section id="about" class="case-section">
+            <div class="section-background about-bg"></div>
+            
+            <div class="about-content">
+                <div class="section-header">
+                    <h2 class="section-title" data-text="about_title">ABOUT CASE STUDIES</h2>
+                    <div class="level-indicator">PROJECT METHODOLOGY</div>
+                </div>
+
+                <div class="methodology-content">
+                    <div class="method-card">
+                        <div class="method-icon">🔍</div>
+                        <h3 class="method-title" data-text="research_title">RESEARCH & DISCOVERY</h3>
+                        <p class="method-description" data-text="research_desc">
+                            Each case study begins with comprehensive market analysis, user research, 
+                            and technical feasibility assessment to identify real-world problems requiring AI solutions.
+                        </p>
+                    </div>
+                    
+                    <div class="method-card">
+                        <div class="method-icon">🏗️</div>
+                        <h3 class="method-title" data-text="architecture_title">TECHNICAL ARCHITECTURE</h3>
+                        <p class="method-description" data-text="architecture_desc">
+                            Detailed system design with scalable architecture, API integrations, 
+                            and AI model selection based on specific use case requirements and performance metrics.
+                        </p>
+                    </div>
+                    
+                    <div class="method-card">
+                        <div class="method-icon">🚀</div>
+                        <h3 class="method-title" data-text="implementation_title">IMPLEMENTATION & TESTING</h3>
+                        <p class="method-description" data-text="implementation_desc">
+                            Iterative development with continuous testing, user feedback integration, 
+                            and performance optimization to ensure production-ready solutions.
+                        </p>
+                    </div>
+                    
+                    <div class="method-card">
+                        <div class="method-icon">📊</div>
+                        <h3 class="method-title" data-text="impact_title">BUSINESS IMPACT</h3>
+                        <p class="method-description" data-text="impact_desc">
+                            Comprehensive analysis of project outcomes, user adoption metrics, 
+                            business value generation, and lessons learned for future development.
+                        </p>
+                    </div>
+                </div>
+
+                <div class="contact-cta">
+                    <h3 class="cta-title" data-text="contact_title">INTERESTED IN COLLABORATION?</h3>
+                    <p class="cta-description" data-text="contact_desc">
+                        Explore these detailed case studies to understand our approach to AI development 
+                        and see how we can help solve your specific business challenges.
+                    </p>
+                    <a href="../index.html#contact" class="contact-btn">
+                        <span class="btn-text" data-text="contact_btn">GET IN TOUCH</span>
+                        <span class="btn-arrow">→</span>
+                    </a>
+                </div>
+            </div>
+        </section>
+    </main>
+
+    <!-- Footer -->
+    <footer class="case-footer">
+        <div class="footer-content">
+            <div class="footer-info">
+                <div class="copyright">
+                    <span data-text="copyright">© 2025 RAFI "V" | RFXLAMIA - CASE STUDIES</span>
+                    <br><span style="font-size: 6px; opacity: 0.7;">POWERED BY MSSTROMLABS</span>
+                </div>
+                <div class="social-links">
+                    <a href="https://linktr.ee/rfxlamia" target="_blank" class="social-link">
+                        <span class="social-icon">🔗</span>
+                        <span class="social-text">LINKTR.EE/RFXLAMIA</span>
+                    </a>
+                </div>
+            </div>
+            <div class="footer-navigation">
+                <a href="../index.html" class="footer-nav-link" data-text="back_main">← BACK TO MAIN PORTFOLIO</a>
+            </div>
+        </div>
+    </footer>
+
+    <!-- Sound Toggle -->
+    <div class="sound-control">
+        <button id="soundToggle" class="sound-btn">
+            <span class="sound-icon">🔊</span>
+        </button>
+    </div>
+
+    <!-- Scripts -->
+    <script src="scripts/case-study.js"></script>
+</body>
+</html>

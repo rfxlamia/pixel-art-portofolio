@@ -1264,25 +1264,26 @@ document.addEventListener('keydown', (e) => {
 
 // Case Study Navigation Function
 function viewCaseStudy(projectId) {
-    // For now, show alert - will be replaced with actual case study website
-    const projectNames = {
-        'buddy': 'Buddy Platform',
-        'automation': 'Business Automation Suite', 
-        'vocana': 'Agent Vocana',
-        'custos': 'Agent Custos',
-        'msstrom': 'Ms.Strom (Project Void)',
-        'toolkit': 'Content Toolkit'
+    // Map project IDs to case study URLs
+    const caseStudyMap = {
+        'buddy': 'case-studies/projects/buddy-platform.html',
+        'automation': 'case-studies/index.html#automation-suite',
+        'vocana': 'case-studies/index.html#agent-vocana',
+        'custos': 'case-studies/index.html#agent-custos',
+        'msstrom': 'case-studies/index.html#ms-strom',
+        'content-tools': 'case-studies/index.html#content-tools'
     };
     
-    const projectName = projectNames[projectId] || 'Project';
+    // Get the specific case study URL or default to main case studies page
+    const caseStudyUrl = caseStudyMap[projectId] || 'case-studies/index.html';
     
-    // Show coming soon message with professional styling
-    const message = `📋 ${projectName} Case Study\n\n🚀 Detailed case study website in development!\n\nComing soon: Interactive case study with:\n• Technical deep-dive\n• Architecture diagrams  \n• Business impact metrics\n• Implementation insights\n\nStay tuned! ⭐`;
+    // Navigate to case study website
+    window.open(caseStudyUrl, '_blank');
     
-    alert(message);
-    
-    // TODO: Replace with actual navigation when case study website is ready
-    // window.open(`/case-study/${projectId}`, '_blank');
+    // Play sound effect if available
+    if (window.pixelPortfolio) {
+        window.pixelPortfolio.playSound('menuSelect');
+    }
 }
 
 // Add focus indicators for keyboard navigation

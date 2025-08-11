@@ -1,0 +1,34 @@
+User-agent: *
+Allow: /
+
+# Case Studies Section
+Allow: /case-studies/
+Allow: /case-studies/index.html
+Allow: /case-studies/projects/
+Allow: /case-studies/styles/
+Allow: /case-studies/scripts/
+
+# Sitemap location
+Sitemap: https://rfxlamia.space/case-studies/sitemap.xml
+
+# Crawl delay for respectful crawling
+Crawl-delay: 1
+
+# Popular search engine specific instructions
+User-agent: Googlebot
+Allow: /
+Crawl-delay: 1
+
+User-agent: Bingbot
+Allow: /
+Crawl-delay: 1
+
+# Block common bad bots
+User-agent: AhrefsBot
+Disallow: /
+
+User-agent: MJ12bot
+Disallow: /
+
+User-agent: DotBot
+Disallow: /
